@@ -1,4 +1,4 @@
-insert into user(username,password) values('admin','admin'),('user','user');
+insert into user values(null,'admin','admin'),(null,'user','user');
 
 insert into university values(null,'French University In Armenia','1st Building, 10 Davit Anhaght Street, Yerevan 0037',1);
 
