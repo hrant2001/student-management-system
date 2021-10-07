@@ -5,9 +5,9 @@ username varchar(50) not null unique,password varchar(50) not null unique);
 
 create table if not exists university(university_id int primary key auto_increment,
 university_name varchar(60) not null unique, location varchar(60),
-creation_id int not null,FOREIGN KEY (creation_id) REFERENCES user(user_id));
+creator_id int not null,FOREIGN KEY (creator_id) REFERENCES user(user_id));
 
 create table if not exists student(student_id int primary key auto_increment, first_name varchar(30) not null,
 last_name varchar(40) not null, birth_date date not null, faculty varchar(30) not null, year tinyint, degree varchar(30),
-creation_id int not null, university_id int not null,
-FOREIGN KEY (creation_id) REFERENCES user(user_id), FOREIGN KEY (university_id) REFERENCES university(university_id));
+creator_id int not null, university_id int not null,
+FOREIGN KEY (creator_id) REFERENCES user(user_id), FOREIGN KEY (university_id) REFERENCES university(university_id));
