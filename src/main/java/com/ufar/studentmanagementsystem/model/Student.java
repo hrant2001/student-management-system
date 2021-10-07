@@ -5,6 +5,7 @@ import java.util.Date;
 public class Student {
     Integer studentID;
     Integer creatorID;
+    Integer universityID;
     String firstName;
     String lastName;
     Date birthDate;
