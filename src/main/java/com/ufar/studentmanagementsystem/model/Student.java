@@ -3,9 +3,9 @@ package com.ufar.studentmanagementsystem.model;
 import java.util.Date;
 
 public class Student {
-    Integer studentID;
-    Integer creatorID;
-    Integer universityID;
+    Integer studentId;
+    Integer creatorId;
+    Integer universityId;
     String firstName;
     String lastName;
     Date birthDate;
@@ -16,12 +16,12 @@ public class Student {
     public Student() {
     }
 
-    public Student(Integer studentID, Integer creatorID, Integer universityID,
+    public Student(Integer studentId, Integer creatorId, Integer universityId,
                    String firstName, String lastName, Date birthDate,
                    String faculty, int year, String degree) {
-        this.studentID = studentID;
-        this.creatorID = creatorID;
-        this.universityID = universityID;
+        this.studentId = studentId;
+        this.creatorId = creatorId;
+        this.universityId = universityId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -30,11 +30,11 @@ public class Student {
         this.degree = degree;
     }
 
-    public Student(Integer creatorID, Integer universityID, String firstName
+    public Student(Integer creatorId, Integer universityId, String firstName
             , String lastName, Date birthDate, String faculty,
                    int year, String degree) {
-        this.creatorID = creatorID;
-        this.universityID = universityID;
+        this.creatorId = creatorId;
+        this.universityId = universityId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -43,28 +43,28 @@ public class Student {
         this.degree = degree;
     }
 
-    public Integer getStudentID() {
-        return studentID;
+    public Integer getStudentId() {
+        return studentId;
     }
 
-    public void setStudentID(Integer studentID) {
-        this.studentID = studentID;
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 
-    public Integer getCreatorID() {
-        return creatorID;
+    public Integer getCreatorId() {
+        return creatorId;
     }
 
-    public void setCreatorID(Integer creatorID) {
-        this.creatorID = creatorID;
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
     }
 
-    public Integer getUniversityID() {
-        return universityID;
+    public Integer getUniversityId() {
+        return universityId;
     }
 
-    public void setUniversityID(Integer universityID) {
-        this.universityID = universityID;
+    public void setUniversityId(Integer universityId) {
+        this.universityId = universityId;
     }
 
     public String getFirstName() {
