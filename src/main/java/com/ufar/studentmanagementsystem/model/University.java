@@ -6,6 +6,8 @@ public class University {
     String location;
     Integer creatorID;
 
+    public University() {
+    }
 
     public University(Integer universityID, String universityName,
                       String location, Integer creatorID) {
@@ -20,7 +22,6 @@ public class University {
         this.location = location;
         this.creatorID = creatorID;
     }
-
 
     public Integer getUniversityID() {
         return universityID;
