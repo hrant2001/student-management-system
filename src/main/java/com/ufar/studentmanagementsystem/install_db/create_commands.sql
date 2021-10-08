@@ -1,5 +1,7 @@
 create database if not exists stud_man_sys;
 
+--use stud_man_sys;
+
 create table if not exists user(user_id int primary key auto_increment,
 username varchar(50) not null unique,password varchar(50) not null unique);
 

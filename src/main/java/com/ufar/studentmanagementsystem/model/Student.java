@@ -13,6 +13,8 @@ public class Student {
     int year;
     String degree;
 
+    public Student() {
+    }
 
     public Student(Integer studentID, Integer creatorID, Integer universityID,
                    String firstName, String lastName, Date birthDate,
@@ -40,7 +42,6 @@ public class Student {
         this.year = year;
         this.degree = degree;
     }
-
 
     public Integer getStudentID() {
         return studentID;
