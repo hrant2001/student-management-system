@@ -19,22 +19,22 @@ public class UserService {
     }
 
     public List<User> findUsers() {
-        return null;
+        return userRepository.findAll();
     }
 
     public User addUser(User user) {
-        return null;
+        return userRepository.add(user);
     }
 
     public Optional<User> findUserById(Integer id) {
-        return Optional.empty();
+        return userRepository.findById(id);
     }
 
     public Optional<User> updateUser(User user) {
-        return null;
+        return userRepository.update(user);
     }
 
     public void deleteUserById(Integer id) {
-
+        userRepository.deleteById(id);
     }
 }

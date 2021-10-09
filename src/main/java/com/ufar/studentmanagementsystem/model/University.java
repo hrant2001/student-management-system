@@ -4,23 +4,23 @@ public class University {
     Integer universityID;
     String universityName;
     String location;
-    Integer creatorID;
+    Integer creatorId;
 
     public University() {
     }
 
     public University(Integer universityID, String universityName,
-                      String location, Integer creatorID) {
+                      String location, Integer creatorId) {
         this.universityID = universityID;
         this.universityName = universityName;
         this.location = location;
-        this.creatorID = creatorID;
+        this.creatorId = creatorId;
     }
 
-    public University(String universityName, String location, Integer creatorID) {
+    public University(String universityName, String location, Integer creatorId) {
         this.universityName = universityName;
         this.location = location;
-        this.creatorID = creatorID;
+        this.creatorId = creatorId;
     }
 
     public Integer getUniversityID() {
@@ -47,11 +47,11 @@ public class University {
         this.location = location;
     }
 
-    public Integer getCreatorID() {
-        return creatorID;
+    public Integer getCreatorId() {
+        return creatorId;
     }
 
-    public void setCreatorID(Integer creatorID) {
-        this.creatorID = creatorID;
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
     }
 }
