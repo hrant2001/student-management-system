@@ -1,5 +1,7 @@
 package com.ufar.studentmanagementsystem.model;
 
+import java.util.Objects;
+
 public class University {
     Integer universityID;
     String universityName;
@@ -53,5 +55,28 @@ public class University {
 
     public void setCreatorId(Integer creatorId) {
         this.creatorId = creatorId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        University that = (University) o;
+        return universityID.equals(that.universityID) && universityName.equals(that.universityName) && location.equals(that.location) && creatorId.equals(that.creatorId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(universityID, universityName, location, creatorId);
+    }
+
+    @Override
+    public String toString() {
+        return "University{" +
+                "universityID=" + universityID +
+                ", universityName='" + universityName + '\'' +
+                ", location='" + location + '\'' +
+                ", creatorId=" + creatorId +
+                '}';
     }
 }

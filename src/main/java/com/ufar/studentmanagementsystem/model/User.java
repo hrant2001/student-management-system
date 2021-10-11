@@ -1,5 +1,7 @@
 package com.ufar.studentmanagementsystem.model;
 
+import java.util.Objects;
+
 public class User {
     Integer userId;
     String userName;
@@ -43,5 +45,25 @@ public class User {
         this.password = password;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return userId.equals(user.userId) && userName.equals(user.userName) && password.equals(user.password);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, userName, password);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

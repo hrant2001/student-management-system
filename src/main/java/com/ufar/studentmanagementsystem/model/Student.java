@@ -1,6 +1,7 @@
 package com.ufar.studentmanagementsystem.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Student {
     Integer studentId;
@@ -113,5 +114,33 @@ public class Student {
 
     public void setDegree(String degree) {
         this.degree = degree;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return year == student.year && studentId.equals(student.studentId) && creatorId.equals(student.creatorId) && universityId.equals(student.universityId) && firstName.equals(student.firstName) && lastName.equals(student.lastName) && birthDate.equals(student.birthDate) && faculty.equals(student.faculty) && degree.equals(student.degree);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(studentId, creatorId, universityId, firstName, lastName, birthDate, faculty, year, degree);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId=" + studentId +
+                ", creatorId=" + creatorId +
+                ", universityId=" + universityId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthDate=" + birthDate +
+                ", faculty='" + faculty + '\'' +
+                ", year=" + year +
+                ", degree='" + degree + '\'' +
+                '}';
     }
 }
