@@ -57,8 +57,7 @@ public class StudentRepository implements Repository<Integer, Student> {
         String sql = "SELECT * from student where student_id = ?";
         Student student = null;
         try {
-            // TODO use another method because this one is deprecated
-            student = jdbcTemplate.queryForObject(sql, new Object[]{id}, rowMapper);
+            student = jdbcTemplate.queryForObject(sql, rowMapper, id);
         } catch (DataAccessException ex) {
             System.err.println("Student not found with id " + id);
         }

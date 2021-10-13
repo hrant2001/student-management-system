@@ -51,8 +51,7 @@ public class UniversityRepository implements Repository<Integer, University> {
         String sql = "SELECT * from university where university_id = ?";
         University university = null;
         try {
-            // TODO use another method because this one is deprecated
-            university = jdbcTemplate.queryForObject(sql, new Object[]{id}, rowMapper);
+            university = jdbcTemplate.queryForObject(sql, rowMapper, id);
         } catch (DataAccessException ex) {
             System.err.println("University not found with id " + id);
         }

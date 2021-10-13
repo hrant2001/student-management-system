@@ -49,8 +49,7 @@ public class UserRepository implements Repository<Integer, User> {
         String sql = "SELECT * from user where user_id = ?";
         User user = null;
         try {
-            // TODO use another method because this one is deprecated
-            user = jdbcTemplate.queryForObject(sql, new Object[]{id}, rowMapper);
+            user = jdbcTemplate.queryForObject(sql, rowMapper, id);
         } catch (DataAccessException ex) {
             System.err.println("User not found with id " + id);
         }
