@@ -21,7 +21,7 @@ public class StudentRepository implements Repository<Integer, Student> {
 
     RowMapper<Student> rowMapper = (rs, rowNum) -> {
         Student student = new Student();
-        student.setStudentId(rs.getInt("student_id"));
+        student.setId(rs.getInt("id"));
         student.setFirstName(rs.getString("first_name"));
         student.setLastName(rs.getString("last_name"));
         student.setBirthDate(rs.getDate("birth_date"));
@@ -69,7 +69,7 @@ public class StudentRepository implements Repository<Integer, Student> {
         String sql = "update student set first_name = ?, last_name = ?, birth_date = ?, faculty = ?, " +
                 "year = ?, degree = ?, creator_id = ?, university_id = ? where student_id = ?";
         int update = jdbcTemplate.update(sql, student.getFirstName(), student.getLastName(), student.getBirthDate(),
-                student.getFaculty(), student.getYear(), student.getDegree(), student.getCreatorId(), student.getUniversityId(), student.getStudentId());
+                student.getFaculty(), student.getYear(), student.getDegree(), student.getCreatorId(), student.getUniversityId(), student.getId());
         if (update == 1) {
             return Optional.of(student);
         }

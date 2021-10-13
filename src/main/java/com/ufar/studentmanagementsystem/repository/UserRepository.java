@@ -21,7 +21,7 @@ public class UserRepository implements Repository<Integer, User> {
 
     RowMapper<User> rowMapper = (rs, rowNum) -> {
         User user = new User();
-        user.setUserId(rs.getInt("user_id"));
+        user.setId(rs.getInt("id"));
         user.setUserName(rs.getString("username"));
         user.setPassword(rs.getString("password"));
         return user;
@@ -60,7 +60,7 @@ public class UserRepository implements Repository<Integer, User> {
     public Optional<User> update(User user) {
 
         String sql = "update user set username = ?, password = ? where user_id = ?";
-        int update = jdbcTemplate.update(sql, user.getUserName(), user.getPassword(), user.getUserId());
+        int update = jdbcTemplate.update(sql, user.getUserName(), user.getPassword(), user.getId());
         if (update == 1) {
             return Optional.of(user);
         }

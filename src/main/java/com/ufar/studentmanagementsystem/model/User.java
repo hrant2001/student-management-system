@@ -3,15 +3,15 @@ package com.ufar.studentmanagementsystem.model;
 import java.util.Objects;
 
 public class User {
-    Integer userId;
-    String userName;
-    String password;
+    private Integer id;
+    private String userName;
+    private String password;
 
     public User() {
     }
 
-    public User(Integer userId, String userName, String password) {
-        this.userId = userId;
+    public User(Integer id, String userName, String password) {
+        this.id = id;
         this.userName = userName;
         this.password = password;
     }
@@ -21,12 +21,12 @@ public class User {
         this.password = password;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -50,18 +50,18 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userId.equals(user.userId) && userName.equals(user.userName) && password.equals(user.password);
+        return id.equals(user.id) && userName.equals(user.userName) && password.equals(user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, userName, password);
+        return Objects.hash(id, userName, password);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
+                "userId=" + id +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 '}';
