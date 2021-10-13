@@ -21,7 +21,7 @@ public class UniversityRepository implements Repository<Integer, University> {
 
     RowMapper<University> rowMapper = (rs, rowNum) -> {
         University university = new University();
-        university.setUniversityID(rs.getInt("university_id"));
+        university.setId(rs.getInt("id"));
         university.setUniversityName(rs.getString("university_name"));
         university.setLocation(rs.getString("location"));
         university.setCreatorId(rs.getInt("creator_id"));
@@ -61,7 +61,7 @@ public class UniversityRepository implements Repository<Integer, University> {
     @Override
     public Optional<University> update(University university) {
         String sql = "update university set university_name = ?, location = ?, creator_id = ? where university_id = ?";
-        int update = jdbcTemplate.update(sql, university.getUniversityName(), university.getLocation(), university.getCreatorId(), university.getUniversityID());
+        int update = jdbcTemplate.update(sql, university.getUniversityName(), university.getLocation(), university.getCreatorId(), university.getId());
         if (update == 1) {
             return Optional.of(university);
         }

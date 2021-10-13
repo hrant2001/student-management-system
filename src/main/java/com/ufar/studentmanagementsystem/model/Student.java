@@ -4,23 +4,23 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Student {
-    Integer studentId;
-    Integer creatorId;
-    Integer universityId;
-    String firstName;
-    String lastName;
-    Date birthDate;
-    String faculty;
-    int year;
-    String degree;
+    private Integer id;
+    private Integer creatorId;
+    private Integer universityId;
+    private String firstName;
+    private String lastName;
+    private Date birthDate;
+    private String faculty;
+    private int year;
+    private String degree;
 
     public Student() {
     }
 
-    public Student(Integer studentId, Integer creatorId, Integer universityId,
+    public Student(Integer id, Integer creatorId, Integer universityId,
                    String firstName, String lastName, Date birthDate,
                    String faculty, int year, String degree) {
-        this.studentId = studentId;
+        this.id = id;
         this.creatorId = creatorId;
         this.universityId = universityId;
         this.firstName = firstName;
@@ -44,12 +44,12 @@ public class Student {
         this.degree = degree;
     }
 
-    public Integer getStudentId() {
-        return studentId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getCreatorId() {
@@ -121,18 +121,18 @@ public class Student {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return year == student.year && studentId.equals(student.studentId) && creatorId.equals(student.creatorId) && universityId.equals(student.universityId) && firstName.equals(student.firstName) && lastName.equals(student.lastName) && birthDate.equals(student.birthDate) && faculty.equals(student.faculty) && degree.equals(student.degree);
+        return year == student.year && id.equals(student.id) && creatorId.equals(student.creatorId) && universityId.equals(student.universityId) && firstName.equals(student.firstName) && lastName.equals(student.lastName) && birthDate.equals(student.birthDate) && faculty.equals(student.faculty) && degree.equals(student.degree);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(studentId, creatorId, universityId, firstName, lastName, birthDate, faculty, year, degree);
+        return Objects.hash(id, creatorId, universityId, firstName, lastName, birthDate, faculty, year, degree);
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "studentId=" + studentId +
+                "studentId=" + id +
                 ", creatorId=" + creatorId +
                 ", universityId=" + universityId +
                 ", firstName='" + firstName + '\'' +
