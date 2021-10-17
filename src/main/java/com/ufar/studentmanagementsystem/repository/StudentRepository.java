@@ -35,14 +35,8 @@ public class StudentRepository implements Repository<Integer, Student> {
     };
 
     @Override
-    public List<Student> findAll() {
-        String sql = "select * from student";
-        return jdbcTemplate.query(sql, rowMapper);
-    }
-
-    @Override
     public Student add(Student student) {
-        String sql = "insert into student values(null,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO student(first_name, last_name, birth_date, faculty, year, degree, creator_id, university_id) VALUES (?,?,?,?,?,?,?,?)";
         int inserted = jdbcTemplate.update(sql, student.getFirstName(), student.getLastName(), student.getBirthDate(),
                 student.getFaculty(), student.getYear(), student.getDegree(), student.getCreatorId(), student.getUniversityId());
         if (inserted == 1) {
@@ -53,8 +47,14 @@ public class StudentRepository implements Repository<Integer, Student> {
     }
 
     @Override
+    public List<Student> findAll() {
+        String sql = "SELECT * FROM student";
+        return jdbcTemplate.query(sql, rowMapper);
+    }
+
+    @Override
     public Optional<Student> findById(Integer id) {
-        String sql = "SELECT * from student where student_id = ?";
+        String sql = "SELECT * FROM student WHERE id = ?";
         Student student = null;
         try {
             student = jdbcTemplate.queryForObject(sql, rowMapper, id);
@@ -66,8 +66,8 @@ public class StudentRepository implements Repository<Integer, Student> {
 
     @Override
     public Optional<Student> update(Student student) {
-        String sql = "update student set first_name = ?, last_name = ?, birth_date = ?, faculty = ?, " +
-                "year = ?, degree = ?, creator_id = ?, university_id = ? where student_id = ?";
+        String sql = "UPDATE student SET first_name = ?, last_name = ?, birth_date = ?, faculty = ?, " +
+                "year = ?, degree = ?, creator_id = ?, university_id = ? WHERE id = ?";
         int update = jdbcTemplate.update(sql, student.getFirstName(), student.getLastName(), student.getBirthDate(),
                 student.getFaculty(), student.getYear(), student.getDegree(), student.getCreatorId(), student.getUniversityId(), student.getId());
         if (update == 1) {
@@ -79,7 +79,7 @@ public class StudentRepository implements Repository<Integer, Student> {
 
     @Override
     public void deleteById(Integer id) {
-        String sql = "delete from student where student_id = ?";
+        String sql = "DELETE FROM student WHERE id = ?";
         int delete = jdbcTemplate.update(sql, id);
         if (delete == 1) {
             System.out.println("Student with id " + id + " was successfully deleted");

@@ -28,14 +28,8 @@ public class UserRepository implements Repository<Integer, User> {
     };
 
     @Override
-    public List<User> findAll() {
-        String sql = "select * from user";
-        return jdbcTemplate.query(sql, rowMapper);
-    }
-
-    @Override
     public User add(User user) {
-        String sql = "insert into user values(null,?,?)";
+        String sql = "INSERT INTO user(username,password) VALUES (?,?)";
         int inserted = jdbcTemplate.update(sql, user.getUserName(), user.getPassword());
         if (inserted == 1) {
             // TODO userId is null
@@ -45,8 +39,14 @@ public class UserRepository implements Repository<Integer, User> {
     }
 
     @Override
+    public List<User> findAll() {
+        String sql = "SELECT * FROM user";
+        return jdbcTemplate.query(sql, rowMapper);
+    }
+
+    @Override
     public Optional<User> findById(Integer id) {
-        String sql = "SELECT * from user where user_id = ?";
+        String sql = "SELECT * FROM user WHERE id = ?";
         User user = null;
         try {
             user = jdbcTemplate.queryForObject(sql, rowMapper, id);
@@ -59,7 +59,7 @@ public class UserRepository implements Repository<Integer, User> {
     @Override
     public Optional<User> update(User user) {
 
-        String sql = "update user set username = ?, password = ? where user_id = ?";
+        String sql = "UPDATE user SET username = ?, password = ? WHERE id = ?";
         int update = jdbcTemplate.update(sql, user.getUserName(), user.getPassword(), user.getId());
         if (update == 1) {
             return Optional.of(user);
@@ -70,7 +70,7 @@ public class UserRepository implements Repository<Integer, User> {
 
     @Override
     public void deleteById(Integer id) {
-        String sql = "delete from user where user_id = ?";
+        String sql = "DELETE FROM user WHERE id = ?";
         int delete = jdbcTemplate.update(sql, id);
         if (delete == 1) {
             System.out.println("User with id " + id + " was successfully deleted");
