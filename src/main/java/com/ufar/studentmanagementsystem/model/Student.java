@@ -1,6 +1,6 @@
 package com.ufar.studentmanagementsystem.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Student {
@@ -9,7 +9,7 @@ public class Student {
     private Integer universityId;
     private String firstName;
     private String lastName;
-    private Date birthDate;
+    private LocalDate birthDate;
     private String faculty;
     private int year;
     private String degree;
@@ -18,7 +18,7 @@ public class Student {
     }
 
     public Student(Integer id, Integer creatorId, Integer universityId,
-                   String firstName, String lastName, Date birthDate,
+                   String firstName, String lastName, LocalDate birthDate,
                    String faculty, int year, String degree) {
         this.id = id;
         this.creatorId = creatorId;
@@ -32,7 +32,7 @@ public class Student {
     }
 
     public Student(Integer creatorId, Integer universityId, String firstName
-            , String lastName, Date birthDate, String faculty,
+            , String lastName, LocalDate birthDate, String faculty,
                    int year, String degree) {
         this.creatorId = creatorId;
         this.universityId = universityId;
@@ -84,11 +84,11 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

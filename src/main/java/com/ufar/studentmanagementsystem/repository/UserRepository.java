@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,9 +33,16 @@ public class UserRepository implements Repository<Integer, User> {
     @Override
     public User add(User user) {
         String sql = "INSERT INTO user(username,password) VALUES (?,?)";
-        int inserted = jdbcTemplate.update(sql, user.getUserName(), user.getPassword());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        int inserted = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, new String[]{"id"});
+            ps.setString(1, user.getUserName());
+            ps.setString(2, user.getPassword());
+            return ps;
+        }, keyHolder);
         if (inserted == 1) {
-            // TODO userId is null
+            Number key = keyHolder.getKey();
+            user.setId(key.intValue());
             return user;
         }
         return null;

@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,9 +35,17 @@ public class UniversityRepository implements Repository<Integer, University> {
     @Override
     public University add(University university) {
         String sql = "INSERT INTO university(name,location,creator_id) VALUES (?,?,?)";
-        int inserted = jdbcTemplate.update(sql, university.getUniversityName(), university.getLocation(), university.getCreatorId());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        int inserted = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, new String[]{"id"});
+            ps.setString(1, university.getUniversityName());
+            ps.setString(2, university.getLocation());
+            ps.setInt(3, university.getCreatorId());
+            return ps;
+        }, keyHolder);
         if (inserted == 1) {
-            // TODO universityId is null
+            Number key = keyHolder.getKey();
+            university.setId(key.intValue());
             return university;
         }
         return null;
