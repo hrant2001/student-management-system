@@ -1,12 +1,14 @@
 package com.ufar.studentmanagementsystem.repository;
 
 import com.ufar.studentmanagementsystem.model.User;
+import com.ufar.studentmanagementsystem.utils.rowmapper.UserRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.util.List;
@@ -22,14 +24,9 @@ public class UserRepository implements Repository<Integer, User> {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    RowMapper<User> rowMapper = (rs, rowNum) -> {
-        User user = new User();
-        user.setId(rs.getInt("id"));
-        user.setUserName(rs.getString("username"));
-        user.setPassword(rs.getString("password"));
-        return user;
-    };
+    RowMapper<User> rowMapper = UserRowMapper.getUserMapper();
 
+    @Transactional
     @Override
     public User add(User user) {
         String sql = "INSERT INTO user(username,password) VALUES (?,?)";
@@ -66,6 +63,7 @@ public class UserRepository implements Repository<Integer, User> {
         return Optional.ofNullable(user);
     }
 
+    @Transactional
     @Override
     public Optional<User> update(User user) {
 
@@ -78,6 +76,7 @@ public class UserRepository implements Repository<Integer, User> {
         return Optional.empty();
     }
 
+    @Transactional
     @Override
     public void deleteById(Integer id) {
         String sql = "DELETE FROM user WHERE id = ?";

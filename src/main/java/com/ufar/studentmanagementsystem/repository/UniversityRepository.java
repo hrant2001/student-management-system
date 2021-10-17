@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.util.List;
@@ -32,6 +33,7 @@ public class UniversityRepository implements Repository<Integer, University> {
         return university;
     };
 
+    @Transactional
     @Override
     public University add(University university) {
         String sql = "INSERT INTO university(name,location,creator_id) VALUES (?,?,?)";
@@ -69,6 +71,7 @@ public class UniversityRepository implements Repository<Integer, University> {
         return Optional.ofNullable(university);
     }
 
+    @Transactional
     @Override
     public Optional<University> update(University university) {
         String sql = "UPDATE university SET name = ?, location = ?, creator_id = ? WHERE id = ?";
@@ -80,6 +83,7 @@ public class UniversityRepository implements Repository<Integer, University> {
         return Optional.empty();
     }
 
+    @Transactional
     @Override
     public void deleteById(Integer id) {
         String sql = "DELETE FROM university WHERE id = ?";
