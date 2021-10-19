@@ -5,7 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,33 +26,42 @@ public class UniversityRepository implements Repository<Integer, University> {
     RowMapper<University> rowMapper = (rs, rowNum) -> {
         University university = new University();
         university.setId(rs.getInt("id"));
-        university.setUniversityName(rs.getString("university_name"));
+        university.setUniversityName(rs.getString("name"));
         university.setLocation(rs.getString("location"));
         university.setCreatorId(rs.getInt("creator_id"));
 
         return university;
     };
 
-    @Override
-    public List<University> findAll() {
-        String sql = "select * from university";
-        return jdbcTemplate.query(sql, rowMapper);
-    }
-
+    @Transactional
     @Override
     public University add(University university) {
-        String sql = "insert into university values(null,?,?,?)";
-        int inserted = jdbcTemplate.update(sql, university.getUniversityName(), university.getLocation(), university.getCreatorId());
+        String sql = "INSERT INTO university(name,location,creator_id) VALUES (?,?,?)";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        int inserted = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, new String[]{"id"});
+            ps.setString(1, university.getUniversityName());
+            ps.setString(2, university.getLocation());
+            ps.setInt(3, university.getCreatorId());
+            return ps;
+        }, keyHolder);
         if (inserted == 1) {
-            // TODO universityId is null
+            Number key = keyHolder.getKey();
+            university.setId(key.intValue());
             return university;
         }
         return null;
     }
 
     @Override
+    public List<University> findAll() {
+        String sql = "SELECT * FROM university";
+        return jdbcTemplate.query(sql, rowMapper);
+    }
+
+    @Override
     public Optional<University> findById(Integer id) {
-        String sql = "SELECT * from university where university_id = ?";
+        String sql = "SELECT * FROM university WHERE id = ?";
         University university = null;
         try {
             university = jdbcTemplate.queryForObject(sql, rowMapper, id);
@@ -58,9 +71,10 @@ public class UniversityRepository implements Repository<Integer, University> {
         return Optional.ofNullable(university);
     }
 
+    @Transactional
     @Override
     public Optional<University> update(University university) {
-        String sql = "update university set university_name = ?, location = ?, creator_id = ? where university_id = ?";
+        String sql = "UPDATE university SET name = ?, location = ?, creator_id = ? WHERE id = ?";
         int update = jdbcTemplate.update(sql, university.getUniversityName(), university.getLocation(), university.getCreatorId(), university.getId());
         if (update == 1) {
             return Optional.of(university);
@@ -69,9 +83,10 @@ public class UniversityRepository implements Repository<Integer, University> {
         return Optional.empty();
     }
 
+    @Transactional
     @Override
     public void deleteById(Integer id) {
-        String sql = "delete from university where university_id = ?";
+        String sql = "DELETE FROM university WHERE id = ?";
         int delete = jdbcTemplate.update(sql, id);
         if (delete == 1) {
             System.out.println("University with id " + id + " was successfully deleted");
