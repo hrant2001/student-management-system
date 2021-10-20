@@ -1,7 +1,11 @@
 package com.ufar.studentmanagementsystem.repository.impl;
 
 import com.ufar.studentmanagementsystem.model.University;
+<<<<<<< HEAD:src/main/java/com/ufar/studentmanagementsystem/repository/UniversityRepositoryImpl.java
+import com.ufar.studentmanagementsystem.utils.rowmapper.UniversityRowMapper;
+=======
 import com.ufar.studentmanagementsystem.repository.UniversityRepository;
+>>>>>>> 3aba81fcc366359855970f9ebebc6f74951e342b:src/main/java/com/ufar/studentmanagementsystem/repository/impl/UniversityRepositoryImpl.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -24,15 +28,7 @@ public class UniversityRepositoryImpl implements UniversityRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    RowMapper<University> rowMapper = (rs, rowNum) -> {
-        University university = new University();
-        university.setId(rs.getInt("id"));
-        university.setUniversityName(rs.getString("name"));
-        university.setLocation(rs.getString("location"));
-        university.setCreatorId(rs.getInt("creator_id"));
-
-        return university;
-    };
+    RowMapper<University> rowMapper = UniversityRowMapper.getUniversityMapper();
 
     @Override
     public University add(University university) {
