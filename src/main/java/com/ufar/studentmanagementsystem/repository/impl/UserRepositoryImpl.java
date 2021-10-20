@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.util.List;
@@ -76,7 +75,6 @@ public class UserRepositoryImpl implements UserRepository {
         return Optional.empty();
     }
 
-    @Transactional
     @Override
     public void deleteById(Integer id) {
         String sql = "DELETE FROM user WHERE id = ?";

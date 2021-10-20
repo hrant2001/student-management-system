@@ -1,11 +1,8 @@
 package com.ufar.studentmanagementsystem.repository.impl;
 
 import com.ufar.studentmanagementsystem.model.University;
-<<<<<<< HEAD:src/main/java/com/ufar/studentmanagementsystem/repository/UniversityRepositoryImpl.java
 import com.ufar.studentmanagementsystem.utils.rowmapper.UniversityRowMapper;
-=======
 import com.ufar.studentmanagementsystem.repository.UniversityRepository;
->>>>>>> 3aba81fcc366359855970f9ebebc6f74951e342b:src/main/java/com/ufar/studentmanagementsystem/repository/impl/UniversityRepositoryImpl.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
