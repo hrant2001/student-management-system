@@ -27,7 +27,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     RowMapper<User> rowMapper = UserRowMapper.getUserMapper();
 
-    @Transactional
     @Override
     public User add(User user) {
         String sql = "INSERT INTO user(username,password) VALUES (?,?)";
@@ -64,7 +63,6 @@ public class UserRepositoryImpl implements UserRepository {
         return Optional.ofNullable(user);
     }
 
-    @Transactional
     @Override
     public Optional<User> update(User user) {
 

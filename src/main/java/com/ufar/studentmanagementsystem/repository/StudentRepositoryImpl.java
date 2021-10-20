@@ -1,7 +1,7 @@
 package com.ufar.studentmanagementsystem.repository;
 
 import com.ufar.studentmanagementsystem.model.Student;
-import com.ufar.studentmanagementsystem.service.StudentService;
+import com.ufar.studentmanagementsystem.utils.rowmapper.StudentRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,20 +26,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    RowMapper<Student> rowMapper = (rs, rowNum) -> {
-        Student student = new Student();
-        student.setId(rs.getInt("id"));
-        student.setFirstName(rs.getString("first_name"));
-        student.setLastName(rs.getString("last_name"));
-        student.setBirthDate(rs.getDate("birth_date").toLocalDate());
-        student.setFaculty(rs.getString("faculty"));
-        student.setYear(rs.getInt("year"));
-        student.setDegree(rs.getString("degree"));
-        student.setCreatorId(rs.getInt("creator_id"));
-        student.setUniversityId(rs.getInt("university_id"));
-
-        return student;
-    };
+    RowMapper<Student> rowMapper = StudentRowMapper.getStudentMapper();
 
     @Transactional
     @Override
