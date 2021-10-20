@@ -1,15 +1,17 @@
-package com.ufar.studentmanagementsystem.service;
+package com.ufar.studentmanagementsystem.service.impl;
 
 import com.ufar.studentmanagementsystem.model.User;
 import com.ufar.studentmanagementsystem.repository.UserRepository;
-import com.ufar.studentmanagementsystem.repository.UserRepositoryImpl;
+import com.ufar.studentmanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -20,13 +22,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUsers() {
-        return userRepository.findAll();
+    @Transactional
+    public User addUser(User user) {
+        return userRepository.add(user);
     }
 
     @Override
-    public User addUser(User user) {
-        return userRepository.add(user);
+    public List<User> findUsers() {
+        return userRepository.findAll();
     }
 
     @Override
@@ -35,11 +38,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public Optional<User> updateUser(User user) {
         return userRepository.update(user);
     }
 
     @Override
+    @Transactional
     public void deleteUserById(Integer id) {
         userRepository.deleteById(id);
     }

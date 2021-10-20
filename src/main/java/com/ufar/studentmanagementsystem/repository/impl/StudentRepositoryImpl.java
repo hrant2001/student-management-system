@@ -1,7 +1,7 @@
-package com.ufar.studentmanagementsystem.repository;
+package com.ufar.studentmanagementsystem.repository.impl;
 
 import com.ufar.studentmanagementsystem.model.Student;
-import com.ufar.studentmanagementsystem.service.StudentService;
+import com.ufar.studentmanagementsystem.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
