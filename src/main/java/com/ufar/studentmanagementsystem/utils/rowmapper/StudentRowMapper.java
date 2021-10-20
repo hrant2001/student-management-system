@@ -1,7 +1,6 @@
 package com.ufar.studentmanagementsystem.utils.rowmapper;
 
 import com.ufar.studentmanagementsystem.model.Student;
-import com.ufar.studentmanagementsystem.model.User;
 import org.springframework.jdbc.core.RowMapper;
 
 public class StudentRowMapper {
