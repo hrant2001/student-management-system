@@ -1,6 +1,7 @@
-package com.ufar.studentmanagementsystem.repository;
+package com.ufar.studentmanagementsystem.repository.impl;
 
 import com.ufar.studentmanagementsystem.model.User;
+import com.ufar.studentmanagementsystem.repository.UserRepository;
 import com.ufar.studentmanagementsystem.utils.rowmapper.UserRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;

@@ -2,7 +2,6 @@ package com.ufar.studentmanagementsystem.controller;
 
 import com.ufar.studentmanagementsystem.model.Student;
 import com.ufar.studentmanagementsystem.service.StudentService;
-import com.ufar.studentmanagementsystem.service.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
