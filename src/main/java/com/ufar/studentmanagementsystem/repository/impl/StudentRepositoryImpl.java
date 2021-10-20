@@ -1,11 +1,8 @@
 package com.ufar.studentmanagementsystem.repository.impl;
 
 import com.ufar.studentmanagementsystem.model.Student;
-<<<<<<< HEAD:src/main/java/com/ufar/studentmanagementsystem/repository/StudentRepositoryImpl.java
 import com.ufar.studentmanagementsystem.utils.rowmapper.StudentRowMapper;
-=======
 import com.ufar.studentmanagementsystem.repository.StudentRepository;
->>>>>>> 3aba81fcc366359855970f9ebebc6f74951e342b:src/main/java/com/ufar/studentmanagementsystem/repository/impl/StudentRepositoryImpl.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,7 +10,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -32,7 +28,6 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     RowMapper<Student> rowMapper = StudentRowMapper.getStudentMapper();
 
-    @Transactional
     @Override
     public Student add(Student student) {
         String sql = "INSERT INTO student(first_name, last_name, birth_date, faculty, year, degree, creator_id, university_id) VALUES (?,?,?,?,?,?,?,?)";
@@ -75,7 +70,6 @@ public class StudentRepositoryImpl implements StudentRepository {
         return Optional.ofNullable(student);
     }
 
-    @Transactional
     @Override
     public Optional<Student> update(Student student) {
         String sql = "UPDATE student SET first_name = ?, last_name = ?, birth_date = ?, faculty = ?, " +
@@ -89,7 +83,6 @@ public class StudentRepositoryImpl implements StudentRepository {
         return Optional.empty();
     }
 
-    @Transactional
     @Override
     public void deleteById(Integer id) {
         String sql = "DELETE FROM student WHERE id = ?";
