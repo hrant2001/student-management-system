@@ -6,14 +6,18 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional(readOnly = true)
 public interface StudentService {
-    List<Student> findStudents();
-
+    @Transactional
     Student addStudent(Student student);
+
+    List<Student> findStudents();
 
     Optional<Student> findStudentById(Integer id);
 
+    @Transactional
     Optional<Student> updateStudent(Student student);
 
+    @Transactional
     void deleteStudentById(Integer id);
 }
