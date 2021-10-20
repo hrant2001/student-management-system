@@ -10,6 +10,7 @@ public class UserRowMapper {
             user.setId(rs.getInt("id"));
             user.setUserName(rs.getString("username"));
             user.setPassword(rs.getString("password"));
+
             return user;
         };
     }
