@@ -1,9 +1,9 @@
-package com.ufar.studentmanagementsystem.exception;
+package com.ufar.studentmanagementsystem.exception.advisor;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class ControllerAdvisor extends ResponseEntityExceptionHandler {
-
+public class StudentControllerAdvisor extends ResponseEntityExceptionHandler {
 }
+

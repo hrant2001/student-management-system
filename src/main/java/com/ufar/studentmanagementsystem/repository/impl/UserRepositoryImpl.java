@@ -64,6 +64,18 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public Optional<User> findByUsername(String username) {
+        String sql = "SELECT * FROM user WHERE username = ?";
+        User user = null;
+        try {
+            user = jdbcTemplate.queryForObject(sql, rowMapper, username);
+        } catch (DataAccessException ex) {
+            System.err.println("User not found with username " + username);
+        }
+        return Optional.ofNullable(user);
+    }
+
+    @Override
     public Optional<User> update(User user) {
 
         String sql = "UPDATE user SET username = ?, password = ? WHERE id = ?";

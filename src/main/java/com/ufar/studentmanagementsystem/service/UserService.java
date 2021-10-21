@@ -13,10 +13,12 @@ public interface UserService {
 
     List<User> findUsers();
 
-    Optional<User> findUserById(Integer id);
+    User findUserById(Integer id);
+
+    Optional<User> findUserByUsername(String username);
 
     @Transactional
-    Optional<User> updateUser(User user);
+    User updateUser(User user);
 
     @Transactional
     void deleteUserById(Integer id);
