@@ -7,10 +7,10 @@ public class UniversityRowMapper {
     public static RowMapper<University> getUniversityMapper() {
         return (rs, rowNum) -> {
             University university = new University();
-            university.setId(rs.getInt("id"));
-            university.setUniversityName(rs.getString("name"));
-            university.setLocation(rs.getString("location"));
-            university.setCreatorId(rs.getInt("creator_id"));
+            university.setId(rs.getInt("id"))
+                    .setUniversityName(rs.getString("name"))
+                    .setLocation(rs.getString("location"))
+                    .setCreatorId(rs.getInt("creator_id"));
 
             return university;
         };
