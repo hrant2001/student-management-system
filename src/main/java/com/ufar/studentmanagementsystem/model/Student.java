@@ -48,72 +48,81 @@ public class Student {
         return id;
     }
 
-    public void setId(Integer id) {
+    public Student setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public Integer getCreatorId() {
         return creatorId;
     }
 
-    public void setCreatorId(Integer creatorId) {
+    public Student setCreatorId(Integer creatorId) {
         this.creatorId = creatorId;
+        return this;
     }
 
     public Integer getUniversityId() {
         return universityId;
     }
 
-    public void setUniversityId(Integer universityId) {
+    public Student setUniversityId(Integer universityId) {
         this.universityId = universityId;
+        return this;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public Student setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public Student setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
 
     public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public Student setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+        return this;
     }
 
     public String getFaculty() {
         return faculty;
     }
 
-    public void setFaculty(String faculty) {
+    public Student setFaculty(String faculty) {
         this.faculty = faculty;
+        return this;
     }
 
     public int getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public Student setYear(int year) {
         this.year = year;
+        return this;
     }
 
     public String getDegree() {
         return degree;
     }
 
-    public void setDegree(String degree) {
+    public Student setDegree(String degree) {
         this.degree = degree;
+        return this;
     }
 
     @Override

@@ -29,32 +29,36 @@ public class University {
         return id;
     }
 
-    public void setId(Integer id) {
+    public University setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getUniversityName() {
         return universityName;
     }
 
-    public void setUniversityName(String universityName) {
+    public University setUniversityName(String universityName) {
         this.universityName = universityName;
+        return this;
     }
 
     public String getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public University setLocation(String location) {
         this.location = location;
+        return this;
     }
 
     public Integer getCreatorId() {
         return creatorId;
     }
 
-    public void setCreatorId(Integer creatorId) {
+    public University setCreatorId(Integer creatorId) {
         this.creatorId = creatorId;
+        return this;
     }
 
     @Override

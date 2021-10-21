@@ -7,9 +7,9 @@ public class UserRowMapper {
     public static RowMapper<User> getUserMapper() {
         return (rs, rowNum) -> {
             User user = new User();
-            user.setId(rs.getInt("id"));
-            user.setUserName(rs.getString("username"));
-            user.setPassword(rs.getString("password"));
+            user.setId(rs.getInt("id"))
+                    .setUserName(rs.getString("username"))
+                    .setPassword(rs.getString("password"));
 
             return user;
         };
