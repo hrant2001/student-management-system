@@ -28,25 +28,17 @@ public class UserController {
 
     @GetMapping("/find/{id}")
     public ResponseEntity<User> findUserById(@PathVariable Integer id) {
-        User user = userService.findUserById(id).orElse(null);
-        if (user == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
     }
 
     @PostMapping("/add")
     public ResponseEntity<User> addUser(@RequestBody User newUser) {
-        User user = userService.addUser(newUser);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.addUser(newUser), HttpStatus.CREATED);
     }
 
     @PutMapping("/update")
     public ResponseEntity<User> updateUser(@RequestBody User updatedUser) {
-
-        User user = userService.updateUser(updatedUser).orElse(null);
-        if (user == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(userService.updateUser(updatedUser), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
