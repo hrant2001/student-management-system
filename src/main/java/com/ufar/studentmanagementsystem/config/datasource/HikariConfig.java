@@ -1,4 +1,4 @@
-package com.ufar.studentmanagementsystem.datasource_config;
+package com.ufar.studentmanagementsystem.config.datasource;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
