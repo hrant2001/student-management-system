@@ -2,5 +2,5 @@
 app:
   datasource:
     jdbc-url: jdbc:mysql://localhost:3306/stud_man_sys
-    username: PUT_YOUR_USERNAME
-    password: PUT_YOUR_PASSWORD
+    username: root
+    password: smsmysql
