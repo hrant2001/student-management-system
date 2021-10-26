@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-
-
 @Service
 public class UniversityServiceImpl implements UniversityService {
 
@@ -33,13 +31,13 @@ public class UniversityServiceImpl implements UniversityService {
 
     @Override
     public University addUniversity(University university) {
-        LOGGER.info("Universities added");
+        LOGGER.info("University added");
         return universityRepository.add(university);
     }
 
     @Override
     public Optional<University> findUniversityById(Integer id) {
-        LOGGER.warn("Problem with the university no: " + id);
+        LOGGER.warn("Not found with the id no: " + id);
         return universityRepository.findById(id);
     }
 

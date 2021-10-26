@@ -34,13 +34,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addUser(User user) {
-        LOGGER.info("Users added");
+        LOGGER.info("User added");
         return userRepository.add(user);
     }
 
     @Override
     public Optional<User> findUserById(Integer id) {
-        LOGGER.warn("Problem with the user no: " + id);
+        LOGGER.warn("Not found with the id no: " + id);
         return userRepository.findById(id);
     }
 

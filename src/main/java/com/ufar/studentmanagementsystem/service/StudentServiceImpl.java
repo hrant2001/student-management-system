@@ -30,19 +30,19 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student addStudent(Student student) {
-        LOGGER.info("Students added");
+        LOGGER.info("Student added");
         return studentRepository.add(student);
     }
 
     @Override
     public Optional<Student> findStudentById(Integer id) {
-        LOGGER.warn("Problem with the student no: " + id);
+        LOGGER.warn("Not found with the id no: " + id);
         return studentRepository.findById(id);
     }
 
     @Override
     public Optional<Student> updateStudent(Student student) {
-        LOGGER.info("Student"+ student + " updated");
+        LOGGER.info("Student "+ student + " updated");
         return studentRepository.update(student);
     }
 
