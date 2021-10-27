@@ -1,12 +1,10 @@
 package com.ufar.studentmanagementsystem.repository;
 
 import com.ufar.studentmanagementsystem.model.Student;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 public interface StudentRepository {
     Student add(Student student);
 

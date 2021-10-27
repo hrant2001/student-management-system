@@ -26,7 +26,7 @@ public class UniversityController {
         return new ResponseEntity<>(universities, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<University> findUniversityById(@PathVariable Integer id) {
         University university = universityService.findUniversityById(id).orElse(null);
         if (university == null)
@@ -34,13 +34,13 @@ public class UniversityController {
         return new ResponseEntity<>(university, HttpStatus.OK);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<University> addUniversity(@RequestBody University newUniversity) {
         University university = universityService.addUniversity(newUniversity);
         return new ResponseEntity<>(university, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public ResponseEntity<University> updateUniversity(@RequestBody University updatedUniversity) {
 
         University university = universityService.updateUniversity(updatedUniversity).orElse(null);
@@ -49,7 +49,7 @@ public class UniversityController {
         return new ResponseEntity<>(university, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUniversityById(@PathVariable Integer id) {
         universityService.deleteUniversityById(id);
         return new ResponseEntity<>(HttpStatus.CREATED);
