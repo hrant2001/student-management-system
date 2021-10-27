@@ -16,6 +16,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class UniversityServiceImpl implements UniversityService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UniversityServiceImpl.class);
+
     private final UniversityRepository universityRepository;
 
     @Autowired
