@@ -1,8 +1,11 @@
 package com.ufar.studentmanagementsystem.service.impl;
 
+import com.ufar.studentmanagementsystem.exception.NotFoundException;
+import com.ufar.studentmanagementsystem.exception.NotValidException;
 import com.ufar.studentmanagementsystem.model.Student;
 import com.ufar.studentmanagementsystem.repository.StudentRepository;
 import com.ufar.studentmanagementsystem.service.StudentService;
+import com.ufar.studentmanagementsystem.service.validation.StudentValidation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -27,7 +29,13 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public Student addStudent(Student student) {
-        LOGGER.info("Student " + student + " is added");
+        if (!StudentValidation.IsValid(student)) {
+            LOGGER.warn("The student " + student + " is not valid");
+            throw new NotValidException("The student is not valid");
+        }
+
+
+        LOGGER.info("The student " + student + " is added");
         return studentRepository.add(student);
     }
 
@@ -38,22 +46,44 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Optional<Student> findStudentById(Integer id) {
-        LOGGER.warn("Student by the id: " + id + "is not found");
-        return studentRepository.findById(id);
+    public Student findStudentById(Integer id) {
+       Student student = studentRepository.findById(id).orElse(null);
+        if (student == null) {
+            LOGGER.warn("The student " + id + " is not found");
+            throw new NotFoundException("The student with id " + id + " is not found");
+        }
+
+        return student;
     }
+
 
     @Override
     @Transactional
-    public Optional<Student> updateStudent(Student student) {
+    public Student updateStudent(Student student) {
+        if (student.getId() == null || student.getId() <= 0 || !StudentValidation.IsValid(student)) {
+            LOGGER.warn("Invalid student");
+            throw new NotValidException("The student is not valid");
+        }
+
+        Student updatingStudent = studentRepository.findById(student.getId()).orElse(null);
+
+        if (updatingStudent == null) {
+            LOGGER.warn("The student " + student.getId() + " is not found");
+            throw new NotFoundException("The user with id " + student.getId() + " is not found");
+        }
         LOGGER.info("Student " + student + " is updated");
-        return studentRepository.update(student);
+        return studentRepository.update(student).get();
     }
 
     @Override
     @Transactional
     public void deleteStudentById(Integer id) {
-        LOGGER.info("Student no: " + id + " is deleted");
+        Student updatingStudent = studentRepository.findById(id).orElse(null);
+        if (updatingStudent == null) {
+            LOGGER.warn("Student no: " + id + " is not found");
+            throw new NotFoundException("The student with id " + id + " is not found");
+        }
+        LOGGER.info("Student " + id + " is deleted");
         studentRepository.deleteById(id);
     }
 }
