@@ -30,12 +30,12 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public Student addStudent(Student student) {
         if (!StudentValidation.IsValid(student)) {
-            LOGGER.warn("The student " + student + " is not valid");
+            LOGGER.warn("The student {} is not valid", student);
             throw new NotValidException("The student is not valid");
         }
 
 
-        LOGGER.info("The student " + student + " is added");
+        LOGGER.info("The student {} is added", student);
         return studentRepository.add(student);
     }
 
@@ -47,9 +47,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student findStudentById(Integer id) {
-       Student student = studentRepository.findById(id).orElse(null);
+        Student student = studentRepository.findById(id).orElse(null);
         if (student == null) {
-            LOGGER.warn("The student " + id + " is not found");
+            LOGGER.warn("The student {} is not found", id);
             throw new NotFoundException("The student with id " + id + " is not found");
         }
 
@@ -68,10 +68,10 @@ public class StudentServiceImpl implements StudentService {
         Student updatingStudent = studentRepository.findById(student.getId()).orElse(null);
 
         if (updatingStudent == null) {
-            LOGGER.warn("The student " + student.getId() + " is not found");
+            LOGGER.warn("The student {} is not found", student.getId());
             throw new NotFoundException("The user with id " + student.getId() + " is not found");
         }
-        LOGGER.info("Student " + student + " is updated");
+        LOGGER.info("Student {} is updated", student);
         return studentRepository.update(student).get();
     }
 
@@ -83,7 +83,7 @@ public class StudentServiceImpl implements StudentService {
             LOGGER.warn("Student no: " + id + " is not found");
             throw new NotFoundException("The student with id " + id + " is not found");
         }
-        LOGGER.info("Student " + id + " is deleted");
+        LOGGER.info("Student {} is deleted", id);
         studentRepository.deleteById(id);
     }
 }

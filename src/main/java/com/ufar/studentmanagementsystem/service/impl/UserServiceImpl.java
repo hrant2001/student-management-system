@@ -32,17 +32,17 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User addUser(User user) {
         if (!UserValidation.IsValid(user)) {
-            LOGGER.warn("The user " + user + " is not valid");
+            LOGGER.warn("The user {} is not valid", user);
             throw new NotValidException("The user is not valid");
         }
 
         User existingUser = findUserByUsername(user.getUserName()).orElse(null);
 
         if (existingUser != null) {
-            LOGGER.warn("The user " + user.getUserName() + " already exists");
+            LOGGER.warn("The user {} already exists", user.getUserName());
             throw new AlreadyExistsException("The user already exists with username " + user.getUserName());
         }
-        LOGGER.info("The user " + user + " is added");
+        LOGGER.info("The user {} is added", user);
         return userRepository.add(user);
     }
 
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
     public User findUserById(Integer id) {
         User user = userRepository.findById(id).orElse(null);
         if (user == null) {
-            LOGGER.warn("The user " + id + " is not found");
+            LOGGER.warn("The user {} is not found", id);
             throw new NotFoundException("The user with id " + id + " is not found");
         }
 
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findUserByUsername(String username) {
-        LOGGER.info("User " + username + " is found");
+        LOGGER.info("User {} is found", username);
         return userRepository.findByUsername(username);
     }
 
@@ -80,10 +80,10 @@ public class UserServiceImpl implements UserService {
         User updatingUser = userRepository.findById(user.getId()).orElse(null);
 
         if (updatingUser == null) {
-            LOGGER.warn("The user " + user.getId() + " is not found");
+            LOGGER.warn("The user {} is not found", user.getId());
             throw new NotFoundException("The user with id " + user.getId() + " is not found");
         }
-        LOGGER.info("User " + user + " is updated");
+        LOGGER.info("User {} is updated", user);
         return userRepository.update(user).get();
     }
 
@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
             LOGGER.warn("User no: " + id + " is not found");
             throw new NotFoundException("The user with id " + id + " is not found");
         }
-        LOGGER.info("User " + id + " is deleted");
+        LOGGER.info("User {} is deleted", id);
         userRepository.deleteById(id);
     }
 }
