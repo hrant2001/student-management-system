@@ -20,6 +20,11 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PostMapping
+    public ResponseEntity<User> addUser(@RequestBody User newUser) {
+        return new ResponseEntity<>(userService.addUser(newUser), HttpStatus.CREATED);
+    }
+
     @GetMapping
     public ResponseEntity<List<User>> findUsers() {
         List<User> users = userService.findUsers();
@@ -29,11 +34,6 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<User> findUserById(@PathVariable Integer id) {
         return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
-    }
-
-    @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody User newUser) {
-        return new ResponseEntity<>(userService.addUser(newUser), HttpStatus.CREATED);
     }
 
     @PutMapping
@@ -46,5 +46,4 @@ public class UserController {
         userService.deleteUserById(id);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
 }
