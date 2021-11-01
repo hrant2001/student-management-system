@@ -1,11 +1,16 @@
 package com.ufar.studentmanagementsystem.model;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class User {
     private Integer id;
     private String userName;
     private String password;
+    private LocalDateTime createdTime;
+    private LocalDateTime updatedTime;
+    private LocalDateTime removedTime;
+    private boolean enabled = true;
 
     public User() {
     }
@@ -46,6 +51,38 @@ public class User {
     public User setPassword(String password) {
         this.password = password;
         return this;
+    }
+
+    public LocalDateTime getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(LocalDateTime createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public LocalDateTime getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(LocalDateTime updatedTime) {
+        this.updatedTime = updatedTime;
+    }
+
+    public LocalDateTime getRemovedTime() {
+        return removedTime;
+    }
+
+    public void setRemovedTime(LocalDateTime removedTime) {
+        this.removedTime = removedTime;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
