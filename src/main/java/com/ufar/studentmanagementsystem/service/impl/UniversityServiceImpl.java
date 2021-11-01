@@ -39,21 +39,21 @@ public class UniversityServiceImpl implements UniversityService {
 
     @Override
     public Optional<University> findUniversityById(Integer id) {
-        LOGGER.warn("University by the id " + id + " is not found");
+        LOGGER.warn("University by the id {} is not found", id);
         return universityRepository.findById(id);
     }
 
     @Override
     @Transactional
     public Optional<University> updateUniversity(University university) {
-        LOGGER.info("University " + university + "is updated");
+        LOGGER.info("University {} is updated", university);
         return universityRepository.update(university);
     }
 
     @Override
     @Transactional
     public void deleteUniversityById(Integer id) {
-        LOGGER.info("University no: " + id + " is deleted");
+        LOGGER.info("University no: {} is deleted", id);
         universityRepository.deleteById(id);
     }
 }
