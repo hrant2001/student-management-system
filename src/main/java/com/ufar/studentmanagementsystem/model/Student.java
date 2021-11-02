@@ -134,32 +134,36 @@ public class Student {
         return createdTime;
     }
 
-    public void setCreatedTime(LocalDateTime createdTime) {
+    public Student setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
+        return this;
     }
 
     public LocalDateTime getUpdatedTime() {
         return updatedTime;
     }
 
-    public void setUpdatedTime(LocalDateTime updatedTime) {
+    public Student setUpdatedTime(LocalDateTime updatedTime) {
         this.updatedTime = updatedTime;
+        return this;
     }
 
     public LocalDateTime getRemovedTime() {
         return removedTime;
     }
 
-    public void setRemovedTime(LocalDateTime removedTime) {
+    public Student setRemovedTime(LocalDateTime removedTime) {
         this.removedTime = removedTime;
+        return this;
     }
 
     public boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public Student setEnabled(boolean enabled) {
         this.enabled = enabled;
+        return this;
     }
 
     @Override

@@ -10,7 +10,12 @@ public class UniversityRowMapper {
             university.setId(rs.getInt("id"))
                     .setUniversityName(rs.getString("name"))
                     .setLocation(rs.getString("location"))
-                    .setCreatorId(rs.getInt("creator_id"));
+                    .setCreatorId(rs.getInt("creator_id"))
+                    .setCreatedTime(rs.getTimestamp("created_time").toLocalDateTime());
+            if (rs.getTimestamp("updated_time") != null)
+                university.setUpdatedTime(rs.getTimestamp("updated_time").toLocalDateTime());
+            if (rs.getTimestamp("removed_time") != null)
+                university.setRemovedTime(rs.getTimestamp("removed_time").toLocalDateTime());
 
             return university;
         };

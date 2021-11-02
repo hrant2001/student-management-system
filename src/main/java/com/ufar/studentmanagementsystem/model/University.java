@@ -80,32 +80,36 @@ public class University {
         return createdTime;
     }
 
-    public void setCreatedTime(LocalDateTime createdTime) {
+    public University setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
+        return this;
     }
 
     public LocalDateTime getUpdatedTime() {
         return updatedTime;
     }
 
-    public void setUpdatedTime(LocalDateTime updatedTime) {
+    public University setUpdatedTime(LocalDateTime updatedTime) {
         this.updatedTime = updatedTime;
+        return this;
     }
 
     public LocalDateTime getRemovedTime() {
         return removedTime;
     }
 
-    public void setRemovedTime(LocalDateTime removedTime) {
+    public University setRemovedTime(LocalDateTime removedTime) {
         this.removedTime = removedTime;
+        return this;
     }
 
     public boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public University setEnabled(boolean enabled) {
         this.enabled = enabled;
+        return this;
     }
 
     @Override
