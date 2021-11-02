@@ -1,5 +1,6 @@
 package com.ufar.studentmanagementsystem.model;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class University {
@@ -7,6 +8,10 @@ public class University {
     private String universityName;
     private String location;
     private Integer creatorId;
+    private LocalDateTime createdTime;
+    private LocalDateTime updatedTime;
+    private LocalDateTime removedTime;
+    private boolean enabled = true;
 
     public University() {
     }
@@ -23,6 +28,16 @@ public class University {
         this.universityName = universityName;
         this.location = location;
         this.creatorId = creatorId;
+    }
+
+    public University(String universityName, String location, Integer creatorId,
+                      LocalDateTime createdTime, LocalDateTime updatedTime, LocalDateTime removedTime) {
+        this.universityName = universityName;
+        this.location = location;
+        this.creatorId = creatorId;
+        this.createdTime = createdTime;
+        this.updatedTime = updatedTime;
+        this.removedTime = removedTime;
     }
 
     public Integer getId() {
@@ -58,6 +73,42 @@ public class University {
 
     public University setCreatorId(Integer creatorId) {
         this.creatorId = creatorId;
+        return this;
+    }
+
+    public LocalDateTime getCreatedTime() {
+        return createdTime;
+    }
+
+    public University setCreatedTime(LocalDateTime createdTime) {
+        this.createdTime = createdTime;
+        return this;
+    }
+
+    public LocalDateTime getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public University setUpdatedTime(LocalDateTime updatedTime) {
+        this.updatedTime = updatedTime;
+        return this;
+    }
+
+    public LocalDateTime getRemovedTime() {
+        return removedTime;
+    }
+
+    public University setRemovedTime(LocalDateTime removedTime) {
+        this.removedTime = removedTime;
+        return this;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public University setEnabled(boolean enabled) {
+        this.enabled = enabled;
         return this;
     }
 

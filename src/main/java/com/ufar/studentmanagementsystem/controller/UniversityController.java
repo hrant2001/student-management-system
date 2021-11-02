@@ -20,6 +20,12 @@ public class UniversityController {
         this.universityService = universityService;
     }
 
+    @PostMapping
+    public ResponseEntity<University> addUniversity(@RequestBody University newUniversity) {
+        University university = universityService.addUniversity(newUniversity);
+        return new ResponseEntity<>(university, HttpStatus.CREATED);
+    }
+
     @GetMapping
     public ResponseEntity<List<University>> findUniversities() {
         List<University> universities = universityService.findUniversities();
@@ -32,12 +38,6 @@ public class UniversityController {
         if (university == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(university, HttpStatus.OK);
-    }
-
-    @PostMapping
-    public ResponseEntity<University> addUniversity(@RequestBody University newUniversity) {
-        University university = universityService.addUniversity(newUniversity);
-        return new ResponseEntity<>(university, HttpStatus.CREATED);
     }
 
     @PutMapping

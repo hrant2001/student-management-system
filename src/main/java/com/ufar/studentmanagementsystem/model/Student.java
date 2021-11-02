@@ -1,6 +1,7 @@
 package com.ufar.studentmanagementsystem.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Student {
@@ -13,6 +14,10 @@ public class Student {
     private String faculty;
     private int year;
     private String degree;
+    private LocalDateTime createdTime;
+    private LocalDateTime updatedTime;
+    private LocalDateTime removedTime;
+    private boolean enabled = true;
 
     public Student() {
     }
@@ -122,6 +127,42 @@ public class Student {
 
     public Student setDegree(String degree) {
         this.degree = degree;
+        return this;
+    }
+
+    public LocalDateTime getCreatedTime() {
+        return createdTime;
+    }
+
+    public Student setCreatedTime(LocalDateTime createdTime) {
+        this.createdTime = createdTime;
+        return this;
+    }
+
+    public LocalDateTime getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public Student setUpdatedTime(LocalDateTime updatedTime) {
+        this.updatedTime = updatedTime;
+        return this;
+    }
+
+    public LocalDateTime getRemovedTime() {
+        return removedTime;
+    }
+
+    public Student setRemovedTime(LocalDateTime removedTime) {
+        this.removedTime = removedTime;
+        return this;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public Student setEnabled(boolean enabled) {
+        this.enabled = enabled;
         return this;
     }
 
