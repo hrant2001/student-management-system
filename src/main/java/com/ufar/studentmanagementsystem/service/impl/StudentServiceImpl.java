@@ -29,11 +29,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public Student addStudent(Student student) {
-        if (!StudentValidation.IsValid(student)) {
+        if (!StudentValidation.isValid(student)) {
             LOGGER.warn("The student {} is not valid", student);
             throw new NotValidException("The student is not valid");
         }
-
 
         LOGGER.info("The student {} is added", student);
         return studentRepository.add(student);
@@ -60,7 +59,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public Student updateStudent(Student student) {
-        if (student.getId() == null || student.getId() <= 0 || !StudentValidation.IsValid(student)) {
+        if (student.getId() == null || student.getId() <= 0 || !StudentValidation.isValid(student)) {
             LOGGER.warn("Invalid student");
             throw new NotValidException("The student is not valid");
         }
@@ -78,9 +77,9 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public void deleteStudentById(Integer id) {
-        Student updatingStudent = studentRepository.findById(id).orElse(null);
-        if (updatingStudent == null) {
-            LOGGER.warn("Student no: " + id + " is not found");
+        Student deletingStudent = studentRepository.findById(id).orElse(null);
+        if (deletingStudent == null) {
+            LOGGER.warn("Student no: {} is not found", id);
             throw new NotFoundException("The student with id " + id + " is not found");
         }
         LOGGER.info("Student {} is deleted", id);

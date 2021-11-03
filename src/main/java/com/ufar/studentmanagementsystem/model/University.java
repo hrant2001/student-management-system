@@ -1,5 +1,6 @@
 package com.ufar.studentmanagementsystem.model;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class University {
@@ -7,6 +8,9 @@ public class University {
     private String universityName;
     private String location;
     private Integer creatorId;
+    private LocalDateTime createdTime;
+    private LocalDateTime updatedTime;
+    private boolean enabled = true;
 
     public University() {
     }
@@ -58,6 +62,33 @@ public class University {
 
     public University setCreatorId(Integer creatorId) {
         this.creatorId = creatorId;
+        return this;
+    }
+
+    public LocalDateTime getCreatedTime() {
+        return createdTime;
+    }
+
+    public University setCreatedTime(LocalDateTime createdTime) {
+        this.createdTime = createdTime;
+        return this;
+    }
+
+    public LocalDateTime getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public University setUpdatedTime(LocalDateTime updatedTime) {
+        this.updatedTime = updatedTime;
+        return this;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public University setEnabled(boolean enabled) {
+        this.enabled = enabled;
         return this;
     }
 

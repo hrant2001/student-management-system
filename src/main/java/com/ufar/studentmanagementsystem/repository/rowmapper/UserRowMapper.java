@@ -9,7 +9,10 @@ public class UserRowMapper {
             User user = new User();
             user.setId(rs.getInt("id"))
                     .setUserName(rs.getString("username"))
-                    .setPassword(rs.getString("password"));
+                    .setPassword(rs.getString("password"))
+                    .setCreatedTime(rs.getTimestamp("created_time").toLocalDateTime());
+            if (rs.getTimestamp("updated_time") != null)
+                user.setUpdatedTime(rs.getTimestamp("updated_time").toLocalDateTime());
 
             return user;
         };

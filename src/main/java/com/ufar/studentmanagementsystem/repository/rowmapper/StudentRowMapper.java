@@ -15,7 +15,10 @@ public class StudentRowMapper {
                     .setYear(rs.getInt("year"))
                     .setDegree(rs.getString("degree"))
                     .setCreatorId(rs.getInt("creator_id"))
-                    .setUniversityId(rs.getInt("university_id"));
+                    .setUniversityId(rs.getInt("university_id"))
+                    .setCreatedTime(rs.getTimestamp("created_time").toLocalDateTime());
+            if (rs.getTimestamp("updated_time") != null)
+                student.setUpdatedTime(rs.getTimestamp("updated_time").toLocalDateTime());
 
             return student;
         };

@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User addUser(User user) {
-        if (!UserValidation.IsValid(user)) {
+        if (!UserValidation.isValid(user)) {
             LOGGER.warn("The user {} is not valid", user);
             throw new NotValidException("The user is not valid");
         }
@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User updateUser(User user) {
-        if (user.getId() == null || user.getId() <= 0 || !UserValidation.IsValid(user)) {
+        if (user.getId() == null || user.getId() <= 0 || !UserValidation.isValid(user)) {
             LOGGER.warn("Invalid user");
             throw new NotValidException("The user is not valid");
         }
@@ -90,8 +90,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void deleteUserById(Integer id) {
-        User updatingUser = userRepository.findById(id).orElse(null);
-        if (updatingUser == null) {
+        User deletingUser = userRepository.findById(id).orElse(null);
+        if (deletingUser == null) {
             LOGGER.warn("User no: " + id + " is not found");
             throw new NotFoundException("The user with id " + id + " is not found");
         }
