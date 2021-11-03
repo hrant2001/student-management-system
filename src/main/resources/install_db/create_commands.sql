@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS user
     password     VARCHAR(50) NOT NULL,
     created_time DATETIME    NOT NULL,
     updated_time DATETIME,
-    removed_time DATETIME,
     enabled BOOLEAN NOT NULL DEFAULT true
 );
 
@@ -21,7 +20,6 @@ CREATE TABLE IF NOT EXISTS university
     creator_id   INT         NOT NULL,
     created_time DATETIME    NOT NULL,
     updated_time DATETIME,
-    removed_time DATETIME,
     enabled BOOLEAN NOT NULL DEFAULT true,
     FOREIGN KEY (creator_id) REFERENCES user (id)
 );
@@ -39,7 +37,6 @@ CREATE TABLE IF NOT EXISTS student
     university_id INT         NOT NULL,
     created_time  DATETIME    NOT NULL,
     updated_time  DATETIME,
-    removed_time  DATETIME,
     enabled BOOLEAN NOT NULL DEFAULT true,
     FOREIGN KEY (creator_id) REFERENCES user (id),
     FOREIGN KEY (university_id) REFERENCES university (id)
