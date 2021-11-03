@@ -19,8 +19,6 @@ public class StudentRowMapper {
                     .setCreatedTime(rs.getTimestamp("created_time").toLocalDateTime());
             if (rs.getTimestamp("updated_time") != null)
                 student.setUpdatedTime(rs.getTimestamp("updated_time").toLocalDateTime());
-            if (rs.getTimestamp("removed_time") != null)
-                student.setRemovedTime(rs.getTimestamp("removed_time").toLocalDateTime());
 
             return student;
         };

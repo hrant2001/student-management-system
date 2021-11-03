@@ -13,8 +13,6 @@ public class UserRowMapper {
                     .setCreatedTime(rs.getTimestamp("created_time").toLocalDateTime());
             if (rs.getTimestamp("updated_time") != null)
                 user.setUpdatedTime(rs.getTimestamp("updated_time").toLocalDateTime());
-            if (rs.getTimestamp("removed_time") != null)
-                user.setRemovedTime(rs.getTimestamp("removed_time").toLocalDateTime());
 
             return user;
         };

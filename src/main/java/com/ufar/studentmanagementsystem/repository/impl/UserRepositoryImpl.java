@@ -93,8 +93,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void deleteById(Integer id) {
-        String sql = "UPDATE user SET enabled = false, removed_time = ? WHERE id = ? AND enabled = true";
-        int delete = jdbcTemplate.update(sql, LocalDateTime.now(), id);
+        String sql = "UPDATE user SET enabled = false WHERE id = ? AND enabled = true";
+        int delete = jdbcTemplate.update(sql, id);
         if (delete == 1) {
             System.out.println("User with id " + id + " was successfully deleted");
         }

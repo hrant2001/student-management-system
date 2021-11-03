@@ -16,7 +16,6 @@ public class Student {
     private String degree;
     private LocalDateTime createdTime;
     private LocalDateTime updatedTime;
-    private LocalDateTime removedTime;
     private boolean enabled = true;
 
     public Student() {
@@ -145,15 +144,6 @@ public class Student {
 
     public Student setUpdatedTime(LocalDateTime updatedTime) {
         this.updatedTime = updatedTime;
-        return this;
-    }
-
-    public LocalDateTime getRemovedTime() {
-        return removedTime;
-    }
-
-    public Student setRemovedTime(LocalDateTime removedTime) {
-        this.removedTime = removedTime;
         return this;
     }
 

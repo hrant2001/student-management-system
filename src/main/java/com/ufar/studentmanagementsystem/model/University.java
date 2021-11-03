@@ -10,7 +10,6 @@ public class University {
     private Integer creatorId;
     private LocalDateTime createdTime;
     private LocalDateTime updatedTime;
-    private LocalDateTime removedTime;
     private boolean enabled = true;
 
     public University() {
@@ -28,16 +27,6 @@ public class University {
         this.universityName = universityName;
         this.location = location;
         this.creatorId = creatorId;
-    }
-
-    public University(String universityName, String location, Integer creatorId,
-                      LocalDateTime createdTime, LocalDateTime updatedTime, LocalDateTime removedTime) {
-        this.universityName = universityName;
-        this.location = location;
-        this.creatorId = creatorId;
-        this.createdTime = createdTime;
-        this.updatedTime = updatedTime;
-        this.removedTime = removedTime;
     }
 
     public Integer getId() {
@@ -91,15 +80,6 @@ public class University {
 
     public University setUpdatedTime(LocalDateTime updatedTime) {
         this.updatedTime = updatedTime;
-        return this;
-    }
-
-    public LocalDateTime getRemovedTime() {
-        return removedTime;
-    }
-
-    public University setRemovedTime(LocalDateTime removedTime) {
-        this.removedTime = removedTime;
         return this;
     }
 
