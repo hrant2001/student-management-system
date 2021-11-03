@@ -14,8 +14,6 @@ public class UniversityRowMapper {
                     .setCreatedTime(rs.getTimestamp("created_time").toLocalDateTime());
             if (rs.getTimestamp("updated_time") != null)
                 university.setUpdatedTime(rs.getTimestamp("updated_time").toLocalDateTime());
-            if (rs.getTimestamp("removed_time") != null)
-                university.setRemovedTime(rs.getTimestamp("removed_time").toLocalDateTime());
 
             return university;
         };

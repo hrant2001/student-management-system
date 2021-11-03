@@ -9,7 +9,6 @@ public class User {
     private String password;
     private LocalDateTime createdTime;
     private LocalDateTime updatedTime;
-    private LocalDateTime removedTime;
     private boolean enabled = true;
 
     public User() {
@@ -68,15 +67,6 @@ public class User {
 
     public User setUpdatedTime(LocalDateTime updatedTime) {
         this.updatedTime = updatedTime;
-        return this;
-    }
-
-    public LocalDateTime getRemovedTime() {
-        return removedTime;
-    }
-
-    public User setRemovedTime(LocalDateTime removedTime) {
-        this.removedTime = removedTime;
         return this;
     }
 
