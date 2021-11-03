@@ -79,7 +79,7 @@ public class StudentServiceImpl implements StudentService {
     public void deleteStudentById(Integer id) {
         Student deletingStudent = studentRepository.findById(id).orElse(null);
         if (deletingStudent == null) {
-            LOGGER.warn("Student no: " + id + " is not found");
+            LOGGER.warn("Student no: {} is not found", id);
             throw new NotFoundException("The student with id " + id + " is not found");
         }
         LOGGER.info("Student {} is deleted", id);
