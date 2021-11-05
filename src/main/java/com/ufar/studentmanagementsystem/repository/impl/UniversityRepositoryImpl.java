@@ -1,8 +1,8 @@
 package com.ufar.studentmanagementsystem.repository.impl;
 
 import com.ufar.studentmanagementsystem.model.University;
-import com.ufar.studentmanagementsystem.repository.rowmapper.UniversityRowMapper;
 import com.ufar.studentmanagementsystem.repository.UniversityRepository;
+import com.ufar.studentmanagementsystem.repository.rowmapper.UniversityRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,6 +12,8 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,13 +31,15 @@ public class UniversityRepositoryImpl implements UniversityRepository {
 
     @Override
     public University add(University university) {
-        String sql = "INSERT INTO university(name,location,creator_id) VALUES (?,?,?)";
+        String sql = "INSERT INTO university(name,location,creator_id, created_time) VALUES (?,?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int inserted = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, new String[]{"id"});
+            university.setCreatedTime(LocalDateTime.now());
             ps.setString(1, university.getUniversityName());
             ps.setString(2, university.getLocation());
             ps.setInt(3, university.getCreatorId());
+            ps.setTimestamp(4, Timestamp.valueOf(university.getCreatedTime()));
             return ps;
         }, keyHolder);
         if (inserted == 1) {
@@ -48,13 +52,13 @@ public class UniversityRepositoryImpl implements UniversityRepository {
 
     @Override
     public List<University> findAll() {
-        String sql = "SELECT * FROM university";
+        String sql = "SELECT * FROM university WHERE enabled = true";
         return jdbcTemplate.query(sql, rowMapper);
     }
 
     @Override
     public Optional<University> findById(Integer id) {
-        String sql = "SELECT * FROM university WHERE id = ?";
+        String sql = "SELECT * FROM university WHERE id = ? AND enabled = true";
         University university = null;
         try {
             university = jdbcTemplate.queryForObject(sql, rowMapper, id);
@@ -64,12 +68,14 @@ public class UniversityRepositoryImpl implements UniversityRepository {
         return Optional.ofNullable(university);
     }
 
+
     @Override
     public Optional<University> update(University university) {
-        String sql = "UPDATE university SET name = ?, location = ?, creator_id = ? WHERE id = ?";
-        int update = jdbcTemplate.update(sql, university.getUniversityName(), university.getLocation(), university.getCreatorId(), university.getId());
+
+        String sql = "UPDATE university SET name = ?, location = ?, updated_time = ? WHERE id = ? AND enabled = true";
+        int update = jdbcTemplate.update(sql, university.getUniversityName(), university.getLocation(), university.setUpdatedTime(LocalDateTime.now()).getUpdatedTime(), university.getId());
         if (update == 1) {
-            return Optional.of(university);
+            return findById(university.getId());
         }
 
         return Optional.empty();
@@ -77,10 +83,11 @@ public class UniversityRepositoryImpl implements UniversityRepository {
 
     @Override
     public void deleteById(Integer id) {
-        String sql = "DELETE FROM university WHERE id = ?";
+        String sql = "UPDATE university SET enabled = false WHERE id = ? AND enabled = true";
         int delete = jdbcTemplate.update(sql, id);
         if (delete == 1) {
             System.out.println("University with id " + id + " was successfully deleted");
         }
     }
 }
+

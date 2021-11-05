@@ -10,9 +10,9 @@ public interface UniversityService {
 
     List<University> findUniversities();
 
-    Optional<University> findUniversityById(Integer id);
+    University findUniversityById(Integer id);
 
-    Optional<University> updateUniversity(University university);
+    University updateUniversity(University university);
 
     void deleteUniversityById(Integer id);
 }

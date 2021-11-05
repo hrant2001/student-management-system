@@ -7,7 +7,6 @@ public class UniversityValidation {
         return university != null
                 && university.getUniversityName() != null && !university.getUniversityName().isEmpty()
                 && university.getLocation() != null && !university.getLocation().isEmpty()
-                && university.getCreatorId() != null && university.getCreatorId() > 0
-                && university.getCreatedTime() != null;
+                && university.getCreatorId() != null && university.getCreatorId() > 0;
     }
 }
