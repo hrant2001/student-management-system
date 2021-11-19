@@ -2,7 +2,6 @@ package com.ufar.studentmanagementsystem.repository;
 
 import com.ufar.studentmanagementsystem.model.Student;
 
-import java.sql.Blob;
 import java.util.List;
 import java.util.Optional;
 

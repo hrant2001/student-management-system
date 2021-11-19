@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User updateUser(User user) {
-        if (user.getId() == null || user.getId() <= 0 || !UserValidation.isValid(user)) {
+        if (!UserValidation.isValid(user) || user.getId() == null || user.getId() <= 0) {
             LOGGER.warn("Invalid user");
             throw new NotValidException("The user is not valid");
         }

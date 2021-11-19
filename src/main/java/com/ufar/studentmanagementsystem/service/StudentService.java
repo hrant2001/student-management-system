@@ -2,7 +2,6 @@ package com.ufar.studentmanagementsystem.service;
 
 import com.ufar.studentmanagementsystem.model.Student;
 
-import java.sql.Blob;
 import java.util.List;
 
 public interface StudentService {
