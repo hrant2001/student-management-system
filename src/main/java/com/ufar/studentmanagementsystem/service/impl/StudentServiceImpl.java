@@ -12,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Blob;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -68,11 +66,10 @@ public class StudentServiceImpl implements StudentService {
         return student;
     }
 
-
     @Override
     @Transactional
     public Student updateStudent(Student student) {
-        if (student.getId() == null || student.getId() <= 0 || !StudentValidation.isValid(student)) {
+        if (!StudentValidation.isValid(student) || student.getId() == null || student.getId() <= 0) {
             LOGGER.warn("Invalid student");
             throw new NotValidException("The student is not valid");
         }

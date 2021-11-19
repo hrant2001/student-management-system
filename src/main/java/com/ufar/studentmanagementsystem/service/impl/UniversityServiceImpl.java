@@ -59,7 +59,7 @@ public class UniversityServiceImpl implements UniversityService {
     @Override
     @Transactional
     public University updateUniversity(University university) {
-        if (university.getId() == null || university.getId() <= 0 || !UniversityValidation.isValid(university)) {
+        if (!UniversityValidation.isValid(university) || university.getId() == null || university.getId() <= 0) {
             LOGGER.warn("Invalid university");
             throw new NotValidException("The university is not valid");
         }
