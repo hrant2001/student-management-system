@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Blob;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -36,6 +38,17 @@ public class StudentServiceImpl implements StudentService {
 
         LOGGER.info("The student {} is added", student);
         return studentRepository.add(student);
+    }
+
+    @Override
+    @Transactional
+    public Student addImage(Integer id) {
+        Student student = studentRepository.findById(id).orElse(null);
+        if (student == null) {
+            LOGGER.warn("The student {} is not found", id);
+            throw new NotFoundException("The student with id " + id + " is not found");
+        }
+        return studentRepository.addImage(id);
     }
 
     @Override
@@ -84,5 +97,17 @@ public class StudentServiceImpl implements StudentService {
         }
         LOGGER.info("Student {} is deleted", id);
         studentRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteImageByStudentId(Integer id) {
+        Student deletingStudent = studentRepository.findById(id).orElse(null);
+        if (deletingStudent == null) {
+            LOGGER.warn("Student no: {} is not found", id);
+            throw new NotFoundException("The student with id " + id + " is not found");
+        }
+        LOGGER.info("Student {} is deleted", id);
+        studentRepository.deleteImageByStudentId(id);
     }
 }

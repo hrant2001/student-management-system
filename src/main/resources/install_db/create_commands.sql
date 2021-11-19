@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS student
     faculty       VARCHAR(30) NOT NULL,
     year          TINYINT,
     degree        VARCHAR(30),
-    image_name    VARCHAR(255),
+    image         BLOB,
     creator_id    INT         NOT NULL,
     university_id INT         NOT NULL,
     created_time  DATETIME    NOT NULL,
