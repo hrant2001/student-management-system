@@ -1,7 +1,5 @@
 CREATE DATABASE IF NOT EXISTS stud_man_sys;
 
-# use stud_man_sys;
-
 CREATE TABLE IF NOT EXISTS user
 (
     id           INT PRIMARY KEY AUTO_INCREMENT,
@@ -33,7 +31,7 @@ CREATE TABLE IF NOT EXISTS student
     faculty       VARCHAR(30) NOT NULL,
     year          TINYINT,
     degree        VARCHAR(30),
-    image         BLOB,
+    image_name    VARCHAR(255),
     creator_id    INT         NOT NULL,
     university_id INT         NOT NULL,
     created_time  DATETIME    NOT NULL,

@@ -25,6 +25,12 @@ public class StudentController {
         return new ResponseEntity<>(studentService.addStudent(newStudent), HttpStatus.CREATED);
     }
 
+    // TODO Modify
+    @PutMapping("/image/{id}")
+    public ResponseEntity<Student> addImageToStudent(@PathVariable Integer id) {
+        return new ResponseEntity<>(studentService.addImage(id), HttpStatus.CREATED);
+    }
+
     @GetMapping
     public ResponseEntity<List<Student>> findStudents() {
         List<Student> students = studentService.findStudents();
@@ -44,6 +50,13 @@ public class StudentController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteStudentById(@PathVariable Integer id) {
         studentService.deleteStudentById(id);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    // TODO Modify
+    @DeleteMapping("/image/{id}")
+    public ResponseEntity<?> deleteImageByStudentId(@PathVariable Integer id) {
+        studentService.deleteImageByStudentId(id);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

@@ -1,5 +1,6 @@
 package com.ufar.studentmanagementsystem.model;
 
+import java.sql.Blob;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -14,7 +15,7 @@ public class Student {
     private String faculty;
     private int year;
     private String degree;
-    private String imageName;
+    private byte[] image;
     private LocalDateTime createdTime;
     private LocalDateTime updatedTime;
     private boolean enabled = true;
@@ -131,12 +132,12 @@ public class Student {
         return this;
     }
 
-    public String getImage() {
-        return imageName;
+    public byte[] getImage() {
+        return image;
     }
 
-    public Student setImage(String imageName) {
-        this.imageName = imageName;
+    public Student setImage(byte[] image) {
+        this.image = image;
         return this;
     }
 
@@ -172,12 +173,12 @@ public class Student {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return year == student.year && id.equals(student.id) && creatorId.equals(student.creatorId) && universityId.equals(student.universityId) && firstName.equals(student.firstName) && lastName.equals(student.lastName) && birthDate.equals(student.birthDate) && faculty.equals(student.faculty) && degree.equals(student.degree) && Objects.equals(imageName, student.imageName);
+        return year == student.year && id.equals(student.id) && creatorId.equals(student.creatorId) && universityId.equals(student.universityId) && firstName.equals(student.firstName) && lastName.equals(student.lastName) && birthDate.equals(student.birthDate) && faculty.equals(student.faculty) && degree.equals(student.degree) && Objects.equals(image, student.image);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, creatorId, universityId, firstName, lastName, birthDate, faculty, year, degree, imageName);
+        return Objects.hash(id, creatorId, universityId, firstName, lastName, birthDate, faculty, year, degree, image);
     }
 
     @Override
@@ -192,7 +193,7 @@ public class Student {
                 ", faculty='" + faculty + '\'' +
                 ", year=" + year +
                 ", degree='" + degree + '\'' +
-                ", imageName='" + imageName + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

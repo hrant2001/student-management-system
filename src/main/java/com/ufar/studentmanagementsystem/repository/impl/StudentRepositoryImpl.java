@@ -3,6 +3,7 @@ package com.ufar.studentmanagementsystem.repository.impl;
 import com.ufar.studentmanagementsystem.model.Student;
 import com.ufar.studentmanagementsystem.repository.rowmapper.StudentRowMapper;
 import com.ufar.studentmanagementsystem.repository.StudentRepository;
+import nonapi.io.github.classgraph.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,11 +11,17 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.sql.Blob;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
+import java.text.MessageFormat;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,6 +64,24 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
+    public Student addImage(Integer id) {
+        Optional<Student> existingStudent = findById(id);
+        String sql = "UPDATE student SET image = ? where id = ? AND enabled = true";
+        File image = new File(MessageFormat.format("src/main/resources/static/images/student{0}.jpg", id));
+        byte[] imageBytes = new byte[0];
+        try {
+            imageBytes = Files.readAllBytes(image.toPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int update = jdbcTemplate.update(sql, imageBytes, id);
+        if (update == 1) {
+            return existingStudent.get().setImage(imageBytes);
+        }
+        return null;
+    }
+
+    @Override
     public List<Student> findAll() {
         String sql = "SELECT * FROM student WHERE enabled = true";
         return jdbcTemplate.query(sql, rowMapper);
@@ -93,6 +118,15 @@ public class StudentRepositoryImpl implements StudentRepository {
         int delete = jdbcTemplate.update(sql, id);
         if (delete == 1) {
             System.out.println("Student with id " + id + " was successfully deleted");
+        }
+    }
+
+    @Override
+    public void deleteImageByStudentId(Integer id) {
+        String sql = "UPDATE student SET image = null WHERE id = ? AND enabled = true";
+        int delete = jdbcTemplate.update(sql, id);
+        if (delete == 1) {
+            System.out.println("Student's image with id " + id + " was successfully deleted");
         }
     }
 }
