@@ -39,6 +39,17 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    @Transactional
+    public Student addImage(Integer id) {
+        Student student = studentRepository.findById(id).orElse(null);
+        if (student == null) {
+            LOGGER.warn("The student {} is not found", id);
+            throw new NotFoundException("The student with id " + id + " is not found");
+        }
+        return studentRepository.addImage(id);
+    }
+
+    @Override
     public List<Student> findStudents() {
         LOGGER.info("Students are found");
         return studentRepository.findAll();
@@ -55,11 +66,10 @@ public class StudentServiceImpl implements StudentService {
         return student;
     }
 
-
     @Override
     @Transactional
     public Student updateStudent(Student student) {
-        if (student.getId() == null || student.getId() <= 0 || !StudentValidation.isValid(student)) {
+        if (!StudentValidation.isValid(student) || student.getId() == null || student.getId() <= 0) {
             LOGGER.warn("Invalid student");
             throw new NotValidException("The student is not valid");
         }
@@ -84,5 +94,17 @@ public class StudentServiceImpl implements StudentService {
         }
         LOGGER.info("Student {} is deleted", id);
         studentRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteImageByStudentId(Integer id) {
+        Student deletingStudent = studentRepository.findById(id).orElse(null);
+        if (deletingStudent == null) {
+            LOGGER.warn("Student no: {} is not found", id);
+            throw new NotFoundException("The student with id " + id + " is not found");
+        }
+        LOGGER.info("Student {} is deleted", id);
+        studentRepository.deleteImageByStudentId(id);
     }
 }

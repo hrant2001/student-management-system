@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS user
     password     VARCHAR(50) NOT NULL,
     created_time DATETIME    NOT NULL,
     updated_time DATETIME,
-    enabled BOOLEAN NOT NULL DEFAULT true
+    enabled      BOOLEAN     NOT NULL DEFAULT true
 );
 
 CREATE TABLE IF NOT EXISTS university
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS university
     creator_id   INT         NOT NULL,
     created_time DATETIME    NOT NULL,
     updated_time DATETIME,
-    enabled BOOLEAN NOT NULL DEFAULT true,
+    enabled      BOOLEAN     NOT NULL DEFAULT true,
     FOREIGN KEY (creator_id) REFERENCES user (id)
 );
 
@@ -33,11 +33,12 @@ CREATE TABLE IF NOT EXISTS student
     faculty       VARCHAR(30) NOT NULL,
     year          TINYINT,
     degree        VARCHAR(30),
+    image         BLOB,
     creator_id    INT         NOT NULL,
     university_id INT         NOT NULL,
     created_time  DATETIME    NOT NULL,
     updated_time  DATETIME,
-    enabled BOOLEAN NOT NULL DEFAULT true,
+    enabled       BOOLEAN     NOT NULL DEFAULT true,
     FOREIGN KEY (creator_id) REFERENCES user (id),
     FOREIGN KEY (university_id) REFERENCES university (id)
 );

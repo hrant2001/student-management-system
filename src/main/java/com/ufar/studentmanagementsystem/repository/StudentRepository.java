@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface StudentRepository {
     Student add(Student student);
 
+    Student addImage(Integer id);
+
     List<Student> findAll();
 
     Optional<Student> findById(Integer id);
@@ -15,4 +17,6 @@ public interface StudentRepository {
     Optional<Student> update(Student student);
 
     void deleteById(Integer id);
+
+    void deleteImageByStudentId(Integer id);
 }
