@@ -47,7 +47,7 @@ public class StudentServiceImpl implements StudentService {
             LOGGER.warn("The student {} is not found", id);
             throw new NotFoundException("The student with id " + id + " is not found");
         }
-        return studentRepository.addImage(id);
+        return studentRepository.addImage(id, image);
     }
 
     @Override

@@ -58,7 +58,7 @@ public class UniversityRepositoryImpl implements UniversityRepository {
     @Override
     public List<University> findAll() {
         String sql = "SELECT * FROM university WHERE enabled = true";
-        LOGGER.warn("The university is not found");
+        LOGGER.info("The universities are found");
         return jdbcTemplate.query(sql, rowMapper);
     }
 
@@ -71,7 +71,6 @@ public class UniversityRepositoryImpl implements UniversityRepository {
         } catch (DataAccessException ex) {
             System.err.println("University not found with id " + id);
         }
-        LOGGER.warn("The university {} is not found", id);
         return Optional.ofNullable(university);
     }
 
@@ -84,7 +83,7 @@ public class UniversityRepositoryImpl implements UniversityRepository {
         if (update == 1) {
             return findById(university.getId());
         }
-        LOGGER.warn("The university {} is not found", university);
+        LOGGER.warn("The university {} is not updated", university);
         return Optional.empty();
     }
 
@@ -93,8 +92,7 @@ public class UniversityRepositoryImpl implements UniversityRepository {
         String sql = "UPDATE university SET enabled = false WHERE id = ? AND enabled = true";
         int delete = jdbcTemplate.update(sql, id);
         if (delete == 1) {
-            LOGGER.warn("The university {} is not deleted", id);
-            System.out.println("University with id " + id + " was successfully deleted");
+            LOGGER.info("University with id {} was successfully deleted", id);
         }
     }
 }

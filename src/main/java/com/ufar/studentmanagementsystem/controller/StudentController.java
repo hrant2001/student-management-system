@@ -26,7 +26,6 @@ public class StudentController {
         return new ResponseEntity<>(studentService.addStudent(newStudent), HttpStatus.CREATED);
     }
 
-    // TODO Modify
     @PutMapping("/{id}/add_image")
     public ResponseEntity<Student> addImageToStudent(@PathVariable Integer id, @RequestParam("image") MultipartFile image) {
         return new ResponseEntity<>(studentService.addImage(id, image), HttpStatus.CREATED);
