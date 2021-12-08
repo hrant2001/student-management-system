@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional
-    public Student addImage(Integer id) {
+    public Student addImage(Integer id, MultipartFile image) {
         Student student = studentRepository.findById(id).orElse(null);
         if (student == null) {
             LOGGER.warn("The student {} is not found", id);

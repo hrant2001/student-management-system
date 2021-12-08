@@ -26,7 +26,6 @@ public class UserServiceTest {
     @Mock
     private UserRepository userRepository;
 
-    @Autowired
     @InjectMocks
     private UserServiceImpl userService;
 

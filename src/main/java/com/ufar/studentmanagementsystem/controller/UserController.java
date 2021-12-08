@@ -5,11 +5,13 @@ import com.ufar.studentmanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/users")
 public class UserController {
 
@@ -26,9 +28,11 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> findUsers() {
+    public String findUsers(Model model) {
         List<User> users = userService.findUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        model.addAttribute("users", users);
+        return "users";
+        //return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
