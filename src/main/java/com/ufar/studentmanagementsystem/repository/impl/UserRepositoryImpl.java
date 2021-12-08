@@ -56,7 +56,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public List<User> findAll() {
         String sql = "SELECT * FROM user WHERE enabled = true";
-        LOGGER.warn("The user is not found");
+        LOGGER.info("The users are found");
         return jdbcTemplate.query(sql, rowMapper);
     }
 
@@ -69,7 +69,7 @@ public class UserRepositoryImpl implements UserRepository {
         } catch (DataAccessException ex) {
             System.err.println("User not found with id " + id);
         }
-        LOGGER.warn("The user {} is not found", id);
+        LOGGER.warn("The user with id {} is found", id);
         return Optional.ofNullable(user);
     }
 
@@ -82,7 +82,6 @@ public class UserRepositoryImpl implements UserRepository {
         } catch (DataAccessException ex) {
             System.out.println("User not found with username " + username);
         }
-        LOGGER.warn("The user by the username {} is not found", username);
         return Optional.ofNullable(user);
     }
 
@@ -94,7 +93,7 @@ public class UserRepositoryImpl implements UserRepository {
         if (update == 1) {
             return findById(user.getId());
         }
-        LOGGER.warn("The user {} is not found", user);
+        LOGGER.warn("The user {} is not updated", user);
         return Optional.empty();
     }
 
@@ -103,8 +102,7 @@ public class UserRepositoryImpl implements UserRepository {
         String sql = "UPDATE user SET enabled = false WHERE id = ? AND enabled = true";
         int delete = jdbcTemplate.update(sql, id);
         if (delete == 1) {
-            LOGGER.warn("The user {} is not deleted", id);
-            System.out.println("User with id " + id + " was successfully deleted");
+            LOGGER.info("User with id {} was successfully deleted", id);
         }
     }
 }

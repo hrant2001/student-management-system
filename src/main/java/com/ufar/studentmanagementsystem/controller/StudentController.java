@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -25,10 +26,9 @@ public class StudentController {
         return new ResponseEntity<>(studentService.addStudent(newStudent), HttpStatus.CREATED);
     }
 
-    // TODO Modify
-    @PutMapping("/image/{id}")
-    public ResponseEntity<Student> addImageToStudent(@PathVariable Integer id) {
-        return new ResponseEntity<>(studentService.addImage(id), HttpStatus.CREATED);
+    @PutMapping("/{id}/add_image")
+    public ResponseEntity<Student> addImageToStudent(@PathVariable Integer id, @RequestParam("image") MultipartFile image) {
+        return new ResponseEntity<>(studentService.addImage(id, image), HttpStatus.CREATED);
     }
 
     @GetMapping
