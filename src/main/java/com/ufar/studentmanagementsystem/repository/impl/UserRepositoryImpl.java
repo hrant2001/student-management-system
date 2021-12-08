@@ -3,6 +3,8 @@ package com.ufar.studentmanagementsystem.repository.impl;
 import com.ufar.studentmanagementsystem.model.User;
 import com.ufar.studentmanagementsystem.repository.UserRepository;
 import com.ufar.studentmanagementsystem.repository.rowmapper.UserRowMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,6 +22,7 @@ import java.util.Optional;
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserRepositoryImpl.class);
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -46,12 +49,14 @@ public class UserRepositoryImpl implements UserRepository {
             user.setId(key.intValue());
             return user;
         }
+        LOGGER.warn("The user {} is not added", user);
         return null;
     }
 
     @Override
     public List<User> findAll() {
         String sql = "SELECT * FROM user WHERE enabled = true";
+        LOGGER.warn("The user is not found");
         return jdbcTemplate.query(sql, rowMapper);
     }
 
@@ -64,6 +69,7 @@ public class UserRepositoryImpl implements UserRepository {
         } catch (DataAccessException ex) {
             System.err.println("User not found with id " + id);
         }
+        LOGGER.warn("The user {} is not found", id);
         return Optional.ofNullable(user);
     }
 
@@ -76,6 +82,7 @@ public class UserRepositoryImpl implements UserRepository {
         } catch (DataAccessException ex) {
             System.out.println("User not found with username " + username);
         }
+        LOGGER.warn("The user by the username {} is not found", username);
         return Optional.ofNullable(user);
     }
 
@@ -87,7 +94,7 @@ public class UserRepositoryImpl implements UserRepository {
         if (update == 1) {
             return findById(user.getId());
         }
-
+        LOGGER.warn("The user {} is not found", user);
         return Optional.empty();
     }
 
@@ -96,6 +103,7 @@ public class UserRepositoryImpl implements UserRepository {
         String sql = "UPDATE user SET enabled = false WHERE id = ? AND enabled = true";
         int delete = jdbcTemplate.update(sql, id);
         if (delete == 1) {
+            LOGGER.warn("The user {} is not deleted", id);
             System.out.println("User with id " + id + " was successfully deleted");
         }
     }

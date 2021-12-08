@@ -3,6 +3,9 @@ package com.ufar.studentmanagementsystem.repository.impl;
 import com.ufar.studentmanagementsystem.model.Student;
 import com.ufar.studentmanagementsystem.repository.rowmapper.StudentRowMapper;
 import com.ufar.studentmanagementsystem.repository.StudentRepository;
+import com.ufar.studentmanagementsystem.service.impl.StudentServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -24,6 +27,7 @@ import java.util.Optional;
 @Repository
 public class StudentRepositoryImpl implements StudentRepository {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(StudentRepositoryImpl.class);
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -56,6 +60,7 @@ public class StudentRepositoryImpl implements StudentRepository {
             student.setId(key.intValue());
             return student;
         }
+        LOGGER.warn("The student {} is not added", student);
         return null;
     }
 
@@ -74,12 +79,14 @@ public class StudentRepositoryImpl implements StudentRepository {
         if (update == 1) {
             return existingStudent.get().setImage(imageBytes);
         }
+        LOGGER.warn("The image {} is not added", id);
         return null;
     }
 
     @Override
     public List<Student> findAll() {
         String sql = "SELECT * FROM student WHERE enabled = true";
+        LOGGER.warn("The student is not found");
         return jdbcTemplate.query(sql, rowMapper);
     }
 
@@ -92,6 +99,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         } catch (DataAccessException ex) {
             System.err.println("Student not found with id " + id);
         }
+        LOGGER.warn("The student {} is not found", id);
         return Optional.ofNullable(student);
     }
 
@@ -104,7 +112,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         if (update == 1) {
             return findById(student.getId());
         }
-
+        LOGGER.warn("The student {} is not found", student);
         return Optional.empty();
     }
 
@@ -114,6 +122,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         int delete = jdbcTemplate.update(sql, id);
         if (delete == 1) {
             System.out.println("Student with id " + id + " was successfully deleted");
+            LOGGER.warn("The student {} is not deleted", id);
         }
     }
 
@@ -123,6 +132,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         int delete = jdbcTemplate.update(sql, id);
         if (delete == 1) {
             System.out.println("Student's image with id " + id + " was successfully deleted");
+            LOGGER.warn("The student {} is not deleted", id);
         }
     }
 }
