@@ -13,6 +13,8 @@ public interface StudentRepository {
 
     List<Student> findAll();
 
+    List<Student> findAllFromUniversity(Integer id);
+
     Optional<Student> findById(Integer id);
 
     Optional<Student> update(Student student);

@@ -88,6 +88,19 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
+    public List<Student> findAllFromUniversity(Integer id) {
+        String sql = "SELECT * FROM student WHERE university_id = ? AND enabled = true";
+        List<Student> students = null;
+        try {
+            students = jdbcTemplate.query(sql, rowMapper, id);
+        } catch (DataAccessException ex) {
+            LOGGER.error("Students not found from university with id {}", id);
+        }
+        LOGGER.warn("The students form university with id {} are found", id);
+        return students;
+    }
+
+    @Override
     public Optional<Student> findById(Integer id) {
         String sql = "SELECT * FROM student WHERE id = ? AND enabled = true";
         Student student = null;
