@@ -57,6 +57,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public List<Student> findStudentsFromUniversity(Integer id) {
+        LOGGER.info("Students are found");
+        return studentRepository.findAllFromUniversity(id);
+    }
+
+    @Override
     public Student findStudentById(Integer id) {
         Student student = studentRepository.findById(id).orElse(null);
         if (student == null) {

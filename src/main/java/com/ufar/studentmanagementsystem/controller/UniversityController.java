@@ -5,11 +5,13 @@ import com.ufar.studentmanagementsystem.service.UniversityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/universities")
 public class UniversityController {
 
@@ -26,9 +28,12 @@ public class UniversityController {
     }
 
     @GetMapping
-    public ResponseEntity<List<University>> findUniversities() {
-        List<University> university = universityService.findUniversities();
-        return new ResponseEntity<>(university, HttpStatus.OK);
+    public String findUniversities(Model model) {
+        List<University> universities = universityService.findUniversities();
+        model.addAttribute("universities", universities);
+        return "universities";
+
+        //return new ResponseEntity<>(university, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

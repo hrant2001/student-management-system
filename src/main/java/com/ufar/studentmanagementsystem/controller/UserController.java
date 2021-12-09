@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/users")
 public class UserController {
 
@@ -28,11 +28,8 @@ public class UserController {
     }
 
     @GetMapping
-    public String findUsers(Model model) {
-        List<User> users = userService.findUsers();
-        model.addAttribute("users", users);
-        return "users";
-        //return new ResponseEntity<>(users, HttpStatus.OK);
+    public ResponseEntity<List<User>> findUsers() {
+        return new ResponseEntity<>(userService.findUsers(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
