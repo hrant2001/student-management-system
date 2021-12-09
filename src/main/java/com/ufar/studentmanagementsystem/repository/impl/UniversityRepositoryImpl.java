@@ -3,6 +3,8 @@ package com.ufar.studentmanagementsystem.repository.impl;
 import com.ufar.studentmanagementsystem.model.University;
 import com.ufar.studentmanagementsystem.repository.UniversityRepository;
 import com.ufar.studentmanagementsystem.repository.rowmapper.UniversityRowMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,7 +22,9 @@ import java.util.Optional;
 @Repository
 public class UniversityRepositoryImpl implements UniversityRepository {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UniversityRepositoryImpl.class);
     private final JdbcTemplate jdbcTemplate;
+
 
     @Autowired
     public UniversityRepositoryImpl(JdbcTemplate jdbcTemplate) {
@@ -47,12 +51,14 @@ public class UniversityRepositoryImpl implements UniversityRepository {
             university.setId(key.intValue());
             return university;
         }
+        LOGGER.warn("The university {} is not added", university);
         return null;
     }
 
     @Override
     public List<University> findAll() {
         String sql = "SELECT * FROM university WHERE enabled = true";
+        LOGGER.info("The universities are found");
         return jdbcTemplate.query(sql, rowMapper);
     }
 
@@ -77,7 +83,7 @@ public class UniversityRepositoryImpl implements UniversityRepository {
         if (update == 1) {
             return findById(university.getId());
         }
-
+        LOGGER.warn("The university {} is not updated", university);
         return Optional.empty();
     }
 
@@ -86,7 +92,7 @@ public class UniversityRepositoryImpl implements UniversityRepository {
         String sql = "UPDATE university SET enabled = false WHERE id = ? AND enabled = true";
         int delete = jdbcTemplate.update(sql, id);
         if (delete == 1) {
-            System.out.println("University with id " + id + " was successfully deleted");
+            LOGGER.info("University with id {} was successfully deleted", id);
         }
     }
 }

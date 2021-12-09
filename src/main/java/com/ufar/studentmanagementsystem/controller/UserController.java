@@ -5,6 +5,8 @@ import com.ufar.studentmanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,8 +29,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<User>> findUsers() {
-        List<User> users = userService.findUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        return new ResponseEntity<>(userService.findUsers(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
