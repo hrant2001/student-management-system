@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Management System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+</head>
+<body>
+    <form action="students" method="post">
+        <div class="container">
+            <h3>Add Student</h3>
+            <table class="table table-bordered table-striped" id="uniTable">
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Birth Date</th>
+                    <th>Faculty</th>
+                    <th>Year</th>
+                    <th>Degree</th>
+                </tr>
+                </thead>
+                <tbody id="tableBody">
+                <tr th:each="s, i: ${students}">
+                    <td th:text="${i.index + 1}"/>
+                    <td th:text="${s.firstName}"/>
+                    <td th:text="${s.lastName}"/>
+                    <td th:text="${s.birthDate}"/>
+                    <td th:text="${s.faculty}"/>
+                    <td th:text="${s.year}"/>
+                    <td th:text="${s.degree}"/>
+                </tr>
+                <tr>
+                    <td>
+                        <label>
+                            <input type="number" name="id" required="required" style="width: 100px">
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <input type="text" name="fname" required="required"  style="width: 180px">
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <input type="text" name="lname" required="required">
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <input type="date" name="birthdate" required="required">
+                        </label></td>
+                    <td>
+                        <label>
+                            <input type="text" name="faculty" required="required">
+                        </label></td>
+                    <td>
+                        <label>
+                            <input type="number" name="year" required="required" style="width: 100px">
+                        </label></td>
+                    <td>
+                        <label>
+                            <input type="text" name="degree" required="required">
+                        </label></td>
+                    <td>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+<!--            <a th:href="@{/universities}" class="btn btn-success">Save</a>-->
+<!--            <a th:href="@{/students}" class="btn btn-danger">Cancel</a>-->
+        </div>
+    </form>
+</body>
+</html>

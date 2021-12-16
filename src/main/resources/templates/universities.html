@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Student Management System</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to SMS Moodle</h1>
+    <br>
+    <br>
+    <br>
+    <h3>List of Universities</h3>
+    <table class="table table-bordered table-striped" id="uniTable">
+      <thead>
+      <tr>
+        <th>No.</th>
+        <th>University Name</th>
+        <th>University Location</th>
+      </tr>
+      </thead>
+      <tbody id="tableBody">
+      <tr th:each="uni, i: ${universities}">
+          <td th:text="${i.index + 1}"/>
+          <td th:text="${uni.universityName}"/>
+          <td th:text="${uni.location}"/>
+          <td><a th:href="@{/students/from/{id}(id=${uni.id})}">Select</a>
+            &nbsp;&nbsp;&nbsp;&nbsp; <a thref="edit-emp">Edit</a>
+            &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete-emp">Delete</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <a href="<%=request.getContextPath()%>/new-emp" class="btn btn-success">Add university</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Management System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+</head>
+<body>
+<div class="container">
+    <h3 th:text="${'List of Students from ' + university.universityName}"></h3>
+    <table class="table table-bordered table-striped" id="uniTable">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Birth Date</th>
+            <th>Faculty</th>
+            <th>Year</th>
+            <th>Degree</th>
+        </tr>
+        </thead>
+        <tbody id="tableBody">
+        <tr th:each="s, i: ${students}">
+            <td th:text="${i.index + 1}"/>
+            <td th:text="${s.firstName}"/>
+            <td th:text="${s.lastName}"/>
+            <td th:text="${s.birthDate}"/>
+            <td th:text="${s.faculty}"/>
+            <td th:text="${s.year}"/>
+            <td th:text="${s.degree}"/>
+            <td><a thref="edit-emp">Edit</a>
+                &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete-emp">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/students/from/{id}/new_stud(id=${university.id})}" class="btn btn-success">Add student</a>
+    <a th:href="@{/universities}" class="btn btn-primary">Back to universities</a>
+</div>
+</body>
+</html>

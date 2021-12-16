@@ -1,40 +1,20 @@
 package com.ufar.studentmanagementsystem.service;
 
 import com.ufar.studentmanagementsystem.model.User;
-import com.ufar.studentmanagementsystem.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class UserService {
+public interface UserService {
+    User addUser(User user);
 
-    private final UserRepository userRepository;
+    List<User> findUsers();
 
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    User findUserById(Integer id);
 
-    public List<User> findUsers() {
-        return userRepository.findAll();
-    }
+    Optional<User> findUserByUsername(String username);
 
-    public User addUser(User user) {
-        return userRepository.add(user);
-    }
+    User updateUser(User user);
 
-    public Optional<User> findUserById(Integer id) {
-        return userRepository.findById(id);
-    }
-
-    public Optional<User> updateUser(User user) {
-        return userRepository.update(user);
-    }
-
-    public void deleteUserById(Integer id) {
-        userRepository.deleteById(id);
-    }
+    void deleteUserById(Integer id);
 }

@@ -1,26 +1,31 @@
 package com.ufar.studentmanagementsystem.model;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Student {
-    Integer studentId;
-    Integer creatorId;
-    Integer universityId;
-    String firstName;
-    String lastName;
-    Date birthDate;
-    String faculty;
-    int year;
-    String degree;
+    private Integer id;
+    private Integer creatorId;
+    private Integer universityId;
+    private String firstName;
+    private String lastName;
+    private LocalDate birthDate;
+    private String faculty;
+    private int year;
+    private String degree;
+    private byte[] image;
+    private LocalDateTime createdTime;
+    private LocalDateTime updatedTime;
+    private boolean enabled = true;
 
     public Student() {
     }
 
-    public Student(Integer studentId, Integer creatorId, Integer universityId,
-                   String firstName, String lastName, Date birthDate,
+    public Student(Integer id, Integer creatorId, Integer universityId,
+                   String firstName, String lastName, LocalDate birthDate,
                    String faculty, int year, String degree) {
-        this.studentId = studentId;
+        this.id = id;
         this.creatorId = creatorId;
         this.universityId = universityId;
         this.firstName = firstName;
@@ -32,7 +37,7 @@ public class Student {
     }
 
     public Student(Integer creatorId, Integer universityId, String firstName
-            , String lastName, Date birthDate, String faculty,
+            , String lastName, LocalDate birthDate, String faculty,
                    int year, String degree) {
         this.creatorId = creatorId;
         this.universityId = universityId;
@@ -44,76 +49,121 @@ public class Student {
         this.degree = degree;
     }
 
-    public Integer getStudentId() {
-        return studentId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public Student setId(Integer id) {
+        this.id = id;
+        return this;
     }
 
     public Integer getCreatorId() {
         return creatorId;
     }
 
-    public void setCreatorId(Integer creatorId) {
+    public Student setCreatorId(Integer creatorId) {
         this.creatorId = creatorId;
+        return this;
     }
 
     public Integer getUniversityId() {
         return universityId;
     }
 
-    public void setUniversityId(Integer universityId) {
+    public Student setUniversityId(Integer universityId) {
         this.universityId = universityId;
+        return this;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public Student setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public Student setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public Student setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+        return this;
     }
 
     public String getFaculty() {
         return faculty;
     }
 
-    public void setFaculty(String faculty) {
+    public Student setFaculty(String faculty) {
         this.faculty = faculty;
+        return this;
     }
 
     public int getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public Student setYear(int year) {
         this.year = year;
+        return this;
     }
 
     public String getDegree() {
         return degree;
     }
 
-    public void setDegree(String degree) {
+    public Student setDegree(String degree) {
         this.degree = degree;
+        return this;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public Student setImage(byte[] image) {
+        this.image = image;
+        return this;
+    }
+
+    public LocalDateTime getCreatedTime() {
+        return createdTime;
+    }
+
+    public Student setCreatedTime(LocalDateTime createdTime) {
+        this.createdTime = createdTime;
+        return this;
+    }
+
+    public LocalDateTime getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public Student setUpdatedTime(LocalDateTime updatedTime) {
+        this.updatedTime = updatedTime;
+        return this;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public Student setEnabled(boolean enabled) {
+        this.enabled = enabled;
+        return this;
     }
 
     @Override
@@ -121,18 +171,18 @@ public class Student {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return year == student.year && studentId.equals(student.studentId) && creatorId.equals(student.creatorId) && universityId.equals(student.universityId) && firstName.equals(student.firstName) && lastName.equals(student.lastName) && birthDate.equals(student.birthDate) && faculty.equals(student.faculty) && degree.equals(student.degree);
+        return year == student.year && id.equals(student.id) && creatorId.equals(student.creatorId) && universityId.equals(student.universityId) && firstName.equals(student.firstName) && lastName.equals(student.lastName) && birthDate.equals(student.birthDate) && faculty.equals(student.faculty) && degree.equals(student.degree) && Objects.equals(image, student.image);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(studentId, creatorId, universityId, firstName, lastName, birthDate, faculty, year, degree);
+        return Objects.hash(id, creatorId, universityId, firstName, lastName, birthDate, faculty, year, degree, image);
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "studentId=" + studentId +
+                "id=" + id +
                 ", creatorId=" + creatorId +
                 ", universityId=" + universityId +
                 ", firstName='" + firstName + '\'' +
@@ -141,6 +191,7 @@ public class Student {
                 ", faculty='" + faculty + '\'' +
                 ", year=" + year +
                 ", degree='" + degree + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

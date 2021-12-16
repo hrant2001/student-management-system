@@ -1,17 +1,21 @@
 package com.ufar.studentmanagementsystem.model;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class User {
-    Integer userId;
-    String userName;
-    String password;
+    private Integer id;
+    private String userName;
+    private String password;
+    private LocalDateTime createdTime;
+    private LocalDateTime updatedTime;
+    private boolean enabled = true;
 
     public User() {
     }
 
-    public User(Integer userId, String userName, String password) {
-        this.userId = userId;
+    public User(Integer id, String userName, String password) {
+        this.id = id;
         this.userName = userName;
         this.password = password;
     }
@@ -21,28 +25,58 @@ public class User {
         this.password = password;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public User setId(Integer id) {
+        this.id = id;
+        return this;
     }
 
     public String getUserName() {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    public User setUserName(String userName) {
         this.userName = userName;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    public LocalDateTime getCreatedTime() {
+        return createdTime;
+    }
+
+    public User setCreatedTime(LocalDateTime createdTime) {
+        this.createdTime = createdTime;
+        return this;
+    }
+
+    public LocalDateTime getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public User setUpdatedTime(LocalDateTime updatedTime) {
+        this.updatedTime = updatedTime;
+        return this;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public User setEnabled(boolean enabled) {
+        this.enabled = enabled;
+        return this;
     }
 
     @Override
@@ -50,18 +84,18 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userId.equals(user.userId) && userName.equals(user.userName) && password.equals(user.password);
+        return id.equals(user.id) && userName.equals(user.userName) && password.equals(user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, userName, password);
+        return Objects.hash(id, userName, password);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
+                "userId=" + id +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 '}';

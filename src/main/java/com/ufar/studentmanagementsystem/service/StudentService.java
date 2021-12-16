@@ -1,40 +1,24 @@
 package com.ufar.studentmanagementsystem.service;
 
 import com.ufar.studentmanagementsystem.model.Student;
-import com.ufar.studentmanagementsystem.repository.StudentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class StudentService {
+public interface StudentService {
+    Student addStudent(Student student);
 
-    private final StudentRepository studentRepository;
+    Student addImage(Integer id, MultipartFile image);
 
-    @Autowired
-    public StudentService(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
+    List<Student> findStudents();
 
-    public List<Student> findStudents() {
-        return studentRepository.findAll();
-    }
+    List<Student> findStudentsFromUniversity(Integer id);
 
-    public Student addStudent(Student student) {
-        return studentRepository.add(student);
-    }
+    Student findStudentById(Integer id);
 
-    public Optional<Student> findStudentById(Integer id) {
-        return studentRepository.findById(id);
-    }
+    Student updateStudent(Student student);
 
-    public Optional<Student> updateStudent(Student student) {
-        return studentRepository.update(student);
-    }
+    void deleteStudentById(Integer id);
 
-    public void deleteStudentById(Integer id) {
-        studentRepository.deleteById(id);
-    }
+    void deleteImageByStudentId(Integer id);
 }

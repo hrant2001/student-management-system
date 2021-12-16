@@ -20,39 +20,29 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PostMapping
+    public ResponseEntity<User> addUser(@RequestBody User newUser) {
+        return new ResponseEntity<>(userService.addUser(newUser), HttpStatus.CREATED);
+    }
+
     @GetMapping
     public ResponseEntity<List<User>> findUsers() {
-        List<User> users = userService.findUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        return new ResponseEntity<>(userService.findUsers(), HttpStatus.OK);
     }
 
-    @GetMapping("/find/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> findUserById(@PathVariable Integer id) {
-        User user = userService.findUserById(id).orElse(null);
-        if (user == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<User> addUser(@RequestBody User newUser) {
-        User user = userService.addUser(newUser);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/update")
+    @PutMapping
     public ResponseEntity<User> updateUser(@RequestBody User updatedUser) {
-
-        User user = userService.updateUser(updatedUser).orElse(null);
-        if (user == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(userService.updateUser(updatedUser), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUserById(@PathVariable Integer id) {
         userService.deleteUserById(id);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
 }
