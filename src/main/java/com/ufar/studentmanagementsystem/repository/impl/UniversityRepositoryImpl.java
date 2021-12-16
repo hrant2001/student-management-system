@@ -68,7 +68,7 @@ public class UniversityRepositoryImpl implements UniversityRepository {
         try {
             university = jdbcTemplate.queryForObject(sql, rowMapper, id);
         } catch (DataAccessException ex) {
-            System.err.println("University not found with id " + id);
+            LOGGER.warn("University not found with id {}", id);
         }
         return Optional.ofNullable(university);
     }

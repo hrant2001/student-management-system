@@ -12,10 +12,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -23,7 +25,6 @@ public class StudentServiceTest {
 
     @Mock
     private StudentRepository studentRepository;
-
 
     @InjectMocks
     private StudentServiceImpl studentService;
@@ -35,8 +36,8 @@ public class StudentServiceTest {
     @BeforeEach
     public void setUp() {
         studentList = new ArrayList<>();
-        student = new Student(1,1, 1, "Hrant", "Arakelyan ", LocalDate.parse("2001-12-03"), "IMA", 4, "Bachelor's degree");
-        updateStudent = new Student(2,2, 2, "Sara", "Kostandyan", LocalDate.parse("2001-02-27"), "IMA", 4, "Bachelor's degree");
+        student = new Student(1, 1, 1, "Hrant", "Arakelyan ", LocalDate.parse("2001-12-03"), "IMA", 4, "Bachelor's degree");
+        updateStudent = new Student(2, 2, 2, "Sara", "Kostandyan", LocalDate.parse("2001-02-27"), "IMA", 4, "Bachelor's degree");
         studentList.add(student);
     }
 

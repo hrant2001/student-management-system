@@ -67,9 +67,9 @@ public class UserRepositoryImpl implements UserRepository {
         try {
             user = jdbcTemplate.queryForObject(sql, rowMapper, id);
         } catch (DataAccessException ex) {
-            System.err.println("User not found with id " + id);
+            LOGGER.warn("The user with id {} is found", id);
         }
-        LOGGER.warn("The user with id {} is found", id);
+
         return Optional.ofNullable(user);
     }
 
@@ -80,7 +80,7 @@ public class UserRepositoryImpl implements UserRepository {
         try {
             user = jdbcTemplate.queryForObject(sql, rowMapper, username);
         } catch (DataAccessException ex) {
-            System.out.println("User not found with username " + username);
+            LOGGER.warn("User not found with username {}",username);
         }
         return Optional.ofNullable(user);
     }
