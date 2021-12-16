@@ -25,7 +25,6 @@ public class UniversityRepositoryImpl implements UniversityRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(UniversityRepositoryImpl.class);
     private final JdbcTemplate jdbcTemplate;
 
-
     @Autowired
     public UniversityRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
