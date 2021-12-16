@@ -94,9 +94,8 @@ public class StudentRepositoryImpl implements StudentRepository {
         try {
             students = jdbcTemplate.query(sql, rowMapper, id);
         } catch (DataAccessException ex) {
-            LOGGER.error("Students not found from university with id {}", id);
+            LOGGER.warn("Students not found from university with id {}", id);
         }
-        LOGGER.warn("The students form university with id {} are found", id);
         return students;
     }
 
@@ -107,9 +106,8 @@ public class StudentRepositoryImpl implements StudentRepository {
         try {
             student = jdbcTemplate.queryForObject(sql, rowMapper, id);
         } catch (DataAccessException ex) {
-            LOGGER.error("Student not found with id {}", id);
+            LOGGER.warn("Student not found with id {}", id);
         }
-        LOGGER.warn("The student {} is found", id);
         return Optional.ofNullable(student);
     }
 

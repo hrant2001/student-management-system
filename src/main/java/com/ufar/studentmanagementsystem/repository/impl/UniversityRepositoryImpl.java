@@ -25,7 +25,6 @@ public class UniversityRepositoryImpl implements UniversityRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(UniversityRepositoryImpl.class);
     private final JdbcTemplate jdbcTemplate;
 
-
     @Autowired
     public UniversityRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -69,7 +68,7 @@ public class UniversityRepositoryImpl implements UniversityRepository {
         try {
             university = jdbcTemplate.queryForObject(sql, rowMapper, id);
         } catch (DataAccessException ex) {
-            System.err.println("University not found with id " + id);
+            LOGGER.warn("University not found with id {}", id);
         }
         return Optional.ofNullable(university);
     }

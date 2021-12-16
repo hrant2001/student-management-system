@@ -13,7 +13,7 @@
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
 <body>
-    <form action="add-emp" method="post">
+    <form action="students" method="post">
         <div class="container">
             <h3>Add Student</h3>
             <table class="table table-bordered table-striped" id="uniTable">
@@ -29,19 +29,24 @@
                 </tr>
                 </thead>
                 <tbody id="tableBody">
-<!--                <tr th:each="s, i: ${students}">-->
-<!--                    <td th:text="${i.index + 1}"/>-->
-<!--                    <td th:text="${s.firstName}"/>-->
-<!--                    <td th:text="${s.lastName}"/>-->
-<!--                    <td th:text="${s.birthDate}"/>-->
-<!--                    <td th:text="${s.faculty}"/>-->
-<!--                    <td th:text="${s.year}"/>-->
-<!--                    <td th:text="${s.degree}"/>-->
-<!--                </tr>-->
+                <tr th:each="s, i: ${students}">
+                    <td th:text="${i.index + 1}"/>
+                    <td th:text="${s.firstName}"/>
+                    <td th:text="${s.lastName}"/>
+                    <td th:text="${s.birthDate}"/>
+                    <td th:text="${s.faculty}"/>
+                    <td th:text="${s.year}"/>
+                    <td th:text="${s.degree}"/>
+                </tr>
                 <tr>
                     <td>
                         <label>
-                            <input type="text" name="fname" required="required">
+                            <input type="number" name="id" required="required" style="width: 100px">
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <input type="text" name="fname" required="required"  style="width: 180px">
                         </label>
                     </td>
                     <td>
@@ -59,7 +64,7 @@
                         </label></td>
                     <td>
                         <label>
-                            <input type="number" name="year" required="required">
+                            <input type="number" name="year" required="required" style="width: 100px">
                         </label></td>
                     <td>
                         <label>

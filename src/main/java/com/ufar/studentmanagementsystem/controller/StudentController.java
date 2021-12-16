@@ -55,6 +55,16 @@ public class StudentController {
         return "students";
     }
 
+    @GetMapping("/from/{id}/new_stud")
+    public String findStudentsForAdding(Model model, @PathVariable Integer id) {
+        List<Student> students = studentService.findStudentsFromUniversity(id);
+
+        model.addAttribute("students", students);
+
+        return "add_student";
+
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Student> findStudentById(@PathVariable Integer id) {
         return new ResponseEntity<>(studentService.findStudentById(id), HttpStatus.OK);

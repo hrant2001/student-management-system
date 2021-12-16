@@ -42,7 +42,7 @@
         </tbody>
     </table>
 
-    <a th:href="@{/universities}" class="btn btn-success">Add student</a>
+    <a th:href="@{/students/from/{id}/new_stud(id=${university.id})}" class="btn btn-success">Add student</a>
     <a th:href="@{/universities}" class="btn btn-primary">Back to universities</a>
 </div>
 </body>

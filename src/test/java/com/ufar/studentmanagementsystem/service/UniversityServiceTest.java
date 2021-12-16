@@ -28,7 +28,6 @@ public class UniversityServiceTest {
     @Mock
     private UniversityRepository universityRepository;
 
-
     @InjectMocks
     private UniversityServiceImpl universityService;
 
@@ -39,8 +38,8 @@ public class UniversityServiceTest {
     @BeforeEach
     public void setUp() {
         list = new ArrayList<>();
-        university = new University(1,"UFAR", "Davit Anhaxt", 1);
-        updateUniversity = new University ("French University in Armenia", "Davit Anhaxt 10", 2);
+        university = new University(1, "UFAR", "Davit Anhaxt", 1);
+        updateUniversity = new University("French University in Armenia", "Davit Anhaxt 10", 2);
         list.add(university);
     }
 
@@ -87,7 +86,6 @@ public class UniversityServiceTest {
     }
 
 
-
     @Test
     @DisplayName("findUniversities Return List Of All Universities")
     public void findUniversities_return_list_of_all_university() {
@@ -132,7 +130,7 @@ public class UniversityServiceTest {
     @Test
     @DisplayName("updateUniversity When University's Username Is Empty")
     public void updateUniversity_when_university_username_is_empty() {
-        University emptyUsernameUniversity = new University(1,"", "New York", 1);
+        University emptyUsernameUniversity = new University(1, "", "New York", 1);
 
         Assertions.assertFalse(UniversityValidation.isValid(emptyUsernameUniversity));
         NotValidException notValidException = Assertions.assertThrows(NotValidException.class, () -> universityService.updateUniversity(emptyUsernameUniversity));
@@ -142,7 +140,7 @@ public class UniversityServiceTest {
     @Test
     @DisplayName("updateUniversity When University's location Is Empty")
     public void updateUniversity_when_university_location_is_empty() {
-        University emptyPasswordUniversity = new University(1,"Not empty", "", 1);
+        University emptyPasswordUniversity = new University(1, "Not empty", "", 1);
 
         Assertions.assertFalse(UniversityValidation.isValid(emptyPasswordUniversity));
         NotValidException notValidException = Assertions.assertThrows(NotValidException.class, () -> universityService.updateUniversity(emptyPasswordUniversity));
@@ -152,7 +150,7 @@ public class UniversityServiceTest {
     @Test
     @DisplayName("updateUniversity When University's Id Is Null")
     public void updateUniversity_when_university_id_id_null() {
-        University nullIdUser = new University(null,"not emtpy", "notEmpty", 1);
+        University nullIdUser = new University(null, "not emtpy", "notEmpty", 1);
 
         Assertions.assertNull(nullIdUser.getId());
         NotValidException notValidException = Assertions.assertThrows(NotValidException.class, () -> universityService.updateUniversity(nullIdUser));
@@ -162,7 +160,7 @@ public class UniversityServiceTest {
     @Test
     @DisplayName("updateUniversity When University's Id Is Non positive")
     public void updateUniversity_when_university_password_is_non_positive() {
-        University nonPositiveIdUniversity = new University(-1,"Not empty", "notEmpty", 1);
+        University nonPositiveIdUniversity = new University(-1, "Not empty", "notEmpty", 1);
 
         Assertions.assertTrue(nonPositiveIdUniversity.getId() <= 0);
         NotValidException notValidException = Assertions.assertThrows(NotValidException.class, () -> universityService.updateUniversity(nonPositiveIdUniversity));

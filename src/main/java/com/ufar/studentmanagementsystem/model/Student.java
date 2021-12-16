@@ -22,7 +22,6 @@ public class Student {
     public Student() {
     }
 
-    //TODO Should we add image to constructors?
     public Student(Integer id, Integer creatorId, Integer universityId,
                    String firstName, String lastName, LocalDate birthDate,
                    String faculty, int year, String degree) {
